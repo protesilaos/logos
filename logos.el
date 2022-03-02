@@ -50,7 +50,8 @@
 ;; when the buffer-local `logos-focus-mode' is enabled.  These will hide
 ;; the mode line (`logos-hide-mode-line'), enable `scroll-lock-mode'
 ;; (`logos-scroll-lock'), and use `variable-pitch-mode' in
-;; non-programming buffers (`logos-variable-pitch').
+;; non-programming buffers (`logos-variable-pitch').  All these
+;; variables are buffer-local.
 ;;
 ;; To position the buffer in the center of the window, use the
 ;; `olivetti' package by Paul W. Rankin.
