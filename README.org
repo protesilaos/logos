@@ -128,6 +128,43 @@ backronyms about the mechanics of this package:
 1. =^L= Only Generates Ostensible Slides
 2. Logos Optionally Garners Outline Sections
 
+* Installation
+:PROPERTIES:
+:CUSTOM_ID: h:b0e78fe5-4e74-4959-be6f-10f7b631d5a0
+:END:
+#+cindex: Installation
+
+Logos is not in any package archive for the time being, though I plan to
+submit it to GNU ELPA (as such, any non-trivial patches require
+copyright assignment to the Free Software Foundation).  Users can rely
+on =straight.el=, =quelpa=, or equivalent to fetch the source.  Below
+are the essentials for those who prefer the manual method.
+
+Assuming your Emacs files are found in =~/.emacs.d/=, execute the
+following commands in a shell prompt:
+
+#+begin_src sh
+cd ~/.emacs.d
+
+# Create a directory for manually-installed packages
+mkdir manual-packages
+
+# Go to the new directory
+cd manual-packages
+
+# Clone this repo, naming it "logos"
+git clone https://gitlab.com/protesilaos/logos.git logos
+#+end_src
+
+Finally, in your =init.el= (or equivalent) evaluate this:
+
+#+begin_src emacs-lisp
+;; Make Elisp files in that directory available to the user.
+(add-to-list 'load-path "~/.emacs.d/manual-packages/logos")
+#+end_src
+
+Everything is in place to set up the package.
+
 * GNU Free Documentation License
 :PROPERTIES:
 :APPENDIX: t
