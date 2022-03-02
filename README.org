@@ -1,4 +1,4 @@
-#+title: Logos for simple presentations with page breaks or outlines
+#+title: Simple presentations for Emacs with page breaks or outlines.
 #+author: Protesilaos Stavrou
 #+email: info@protesilaos.com
 #+language: en
