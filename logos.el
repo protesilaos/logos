@@ -37,10 +37,10 @@
 ;; Logos does not define any key bindings.  Try something like this, if
 ;; you want:
 ;;
-;; (let ((map global-map))
-;;   (define-key map [remap narrow-to-region] #'logos-narrow-dwim)
-;;   (define-key map [remap forward-page] #'logos-forward-page-dwim)
-;;   (define-key map [remap backward-page] #'logos-backward-page-dwim))
+;;     (let ((map global-map))
+;;       (define-key map [remap narrow-to-region] #'logos-narrow-dwim)
+;;       (define-key map [remap forward-page] #'logos-forward-page-dwim)
+;;       (define-key map [remap backward-page] #'logos-backward-page-dwim))
 ;;
 ;; By default those key bindings are: C-x n n, C-x ], C-x [.  The
 ;; `logos-narrow-dwim' is not necessary if you already know how to
@@ -54,7 +54,16 @@
 ;; variables are buffer-local.
 ;;
 ;; To position the buffer in the center of the window, use the
-;; `olivetti' package by Paul W. Rankin.
+;; `olivetti' package by Paul W. Rankin.  Sample glue code:
+;;
+;;     (defun my-logos--olivetti-mode ()
+;;       "Toggle `olivetti-mode'."
+;;       (if (or (bound-and-true-p olivetti-mode)
+;;               (null (logos--focus-p)))
+;;           (olivetti-mode -1)
+;;         (olivetti-mode 1)))
+;;     
+;;     (add-hook 'logos-focus-mode-hook #'my-logos--olivetti-mode)
 ;;
 ;; Logos is the familiar word derived from Greek (watch my presentation
 ;; on philosophy about Cosmos, Logos, and the living universe:

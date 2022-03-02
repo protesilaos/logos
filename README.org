@@ -105,7 +105,19 @@ buffers (~logos-variable-pitch~).  All these variables are
 buffer-local.
 
 To position the buffer in the center of the window, use the =olivetti=
-package by Paul W. Rankin.
+package by Paul W. Rankin.  Sample glue code:
+
+#+begin_src emacs-lisp
+;; glue code for `logos-focus-mode' and `olivetti-mode'
+(defun my-logos--olivetti-mode ()
+  "Toggle `olivetti-mode'."
+  (if (or (bound-and-true-p olivetti-mode)
+          (null (logos--focus-p)))
+      (olivetti-mode -1)
+    (olivetti-mode 1)))
+
+(add-hook 'logos-focus-mode-hook #'my-logos--olivetti-mode)
+#+end_src
 
 Logos is the familiar word derived from Greek (watch my presentation on
 philosophy about Cosmos, Logos, and the living universe:
