@@ -205,21 +205,35 @@ changes out-of-the-box:
 (setq logos-scroll-lock nil)
 (setq logos-variable-pitch nil)
 
+(let ((map global-map))
+  (define-key map [remap narrow-to-region] #'logos-narrow-dwim)
+  (define-key map [remap forward-page] #'logos-forward-page-dwim)
+  (define-key map [remap backward-page] #'logos-backward-page-dwim)
+  (define-key map (kbd "<f9>") #'logos-focus-mode))
+
 ;; glue code for `logos-focus-mode' and `olivetti-mode'
-(defun prot/logos--olivetti-mode ()
+(defun my-logos--olivetti-mode ()
   "Toggle `olivetti-mode'."
   (if (or (bound-and-true-p olivetti-mode)
           (null (logos--focus-p)))
       (olivetti-mode -1)
     (olivetti-mode 1)))
 
-(add-hook 'logos-focus-mode-hook #'prot/logos--olivetti-mode)
+(add-hook 'logos-focus-mode-hook #'my-logos--olivetti-mode)
 
-(let ((map global-map))
-  (define-key map [remap narrow-to-region] #'logos-narrow-dwim)
-  (define-key map [remap forward-page] #'logos-forward-page-dwim)
-  (define-key map [remap backward-page] #'logos-backward-page-dwim)
-  (define-key map (kbd "<f9>") #'logos-focus-mode))
+;; glue code to expand an Org/Outline heading
+(defun my-logos--reveal ()
+  "Reveal Org or Outline entry."
+  (cond
+   ((and (eq major-mode 'org-mode)
+         (org-at-heading-p))
+    (org-show-entry)
+    (org-reveal t))
+   ((or (bound-and-true-p prot-outline-minor-mode)
+        (bound-and-true-p outline-minor-mode))
+    (outline-show-entry))))
+
+(add-hook 'logos-page-motion-hook #'my-logos--reveal)
 #+end_src
 
 * GNU Free Documentation License
