@@ -165,6 +165,63 @@ Finally, in your =init.el= (or equivalent) evaluate this:
 
 Everything is in place to set up the package.
 
+* Sample configuration
+:PROPERTIES:
+:CUSTOM_ID: h:6ed7f2fd-faad-48c9-bdd2-7e909639128d
+:END:
+#+cindex: Package configuration
+
+Logos does not bind its own keys and does not make any opinionated
+changes out-of-the-box:
+
++ To get the do-what-I-mean page motions add your own key bindings.  In
+  the example below, they take the stead of ~forward-page~ (=C-x ]=) and
+  ~backward-page~ (=C-x [=).  The command ~logos-narrow-dwim~ need not
+  be bound, especially if you are already familiar with the various
+  narrowing commands (otherwise it maps to =C-x n n= in this example,
+  assuming the default keys).
+
++ To have quick access to ~logos-focus-mode~, bind it to a key.  This
+  mode checks the variables ~logos-hide-mode-line~, ~logos-scroll-lock~,
+  ~logos-variable-pitch~ and applies their effects if they are non-nil.
+  Note that everything is buffer-local, so it is possible to use file
+  variables as described in the Emacs manual.
+
++ If you want to center the buffer in its window, use the =olivetti=
+  package by Paul W. Rankin and simply apply some glue code to activate
+  ~olivetti-mode~ when ~logos-focus-mode~ is active.
+
+#+begin_src emacs-lisp
+(require 'logos)
+
+(setq logos-outlines-are-pages t)
+(setq logos-outline-regexp-alist
+      `((emacs-lisp-mode . "^;;;+ ")
+        (org-mode . "^\\*+ +")
+        (t . ,(or outline-regexp logos--page-delimiter))))
+
+;; These apply when `logos-focus-mode' is enabled
+(setq logos-hide-mode-line nil)
+(setq logos-scroll-lock nil)
+(setq logos-variable-pitch nil)
+
+;; glue code for `logos-focus-mode' and `olivetti-mode'
+(defun prot/logos--olivetti-mode ()
+  "Toggle `olivetti-mode'."
+  (if (or (bound-and-true-p olivetti-mode)
+          (null (logos--focus-p)))
+      (olivetti-mode -1)
+    (olivetti-mode 1)))
+
+(add-hook 'logos-focus-mode-hook #'prot/logos--olivetti-mode)
+
+(let ((map global-map))
+  (define-key map [remap narrow-to-region] #'logos-narrow-dwim)
+  (define-key map [remap forward-page] #'logos-forward-page-dwim)
+  (define-key map [remap backward-page] #'logos-backward-page-dwim)
+  (define-key map (kbd "<f9>") #'logos-focus-mode))
+#+end_src
+
 * GNU Free Documentation License
 :PROPERTIES:
 :APPENDIX: t
