@@ -97,12 +97,15 @@ This is only relevant when `logos-focus-mode' is enabled."
   :type 'boolean
   :group 'logos)
 
+(make-variable-buffer-local 'logos-hide-mode-line)
 
 (defcustom logos-scroll-lock nil
   "When non-nil, use `scroll-lock-mode'.
 This is only relevant when `logos-focus-mode' is enabled."
   :type 'boolean
   :group 'logos)
+
+(make-variable-buffer-local 'logos-scroll-lock)
 
 (defcustom logos-variable-pitch nil
   "When non-nil, `text-mode' buffers use `variable-pitch-mode'.
@@ -112,6 +115,8 @@ assumed to be a monospaced typeface.
 This is only relevant when `logos-focus-mode' is enabled."
   :type 'boolean
   :group 'logos)
+
+(make-variable-buffer-local 'logos-variable-pitch)
 
 ;;;; General utilities
 
