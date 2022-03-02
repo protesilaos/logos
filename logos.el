@@ -253,7 +253,7 @@ If narrowing is in effect, widen the view."
   "Buffer-local mode for focused editing."
   :init-value nil
   :global nil
-  :lighter " Λ" ; greek lambda majuscule
+  :lighter " Λ" ; lambda majuscule
   (logos--setup))
 
 (defun logos--setup ()
