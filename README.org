@@ -245,7 +245,7 @@ something like this:
    ((and (eq major-mode 'org-mode)
          (org-at-heading-p))
     (org-show-subtree))
-   ((or (bound-and-true-p prot-outline-minor-mode)
+   ((or (eq major-mode 'outline-mode)
         (bound-and-true-p outline-minor-mode))
     (outline-show-subtree))))
 
