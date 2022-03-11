@@ -46,39 +46,9 @@
 ;; `logos-narrow-dwim' is not necessary if you already know how to
 ;; narrow effectively.
 ;;
-;; Logos provides some optional aesthetic tweaks which come into effect
-;; when the buffer-local `logos-focus-mode' is enabled.  These will hide
-;; the mode line (`logos-hide-mode-line'), enable `scroll-lock-mode'
-;; (`logos-scroll-lock'), and use `variable-pitch-mode' in
-;; non-programming buffers (`logos-variable-pitch').  All these
-;; variables are buffer-local.
-;;
-;; To position the buffer in the center of the window, use the
-;; `olivetti' package by Paul W. Rankin.  Sample glue code:
-;;
-;;    (defun my-logos--olivetti-mode ()
-;;      "Toggle `olivetti-mode'."
-;;      (if (or (bound-and-true-p olivetti-mode)
-;;              (null (logos--focus-p)))
-;;          (olivetti-mode -1)
-;;        (olivetti-mode 1)))
-;;    
-;;    (add-hook 'logos-focus-mode-hook #'my-logos--olivetti-mode)
-;;
-;; To automatically expand contracted Org/Outline headings, use
-;; something like:
-;;
-;;    (defun my-logos--reveal ()
-;;      "Reveal Org or Outline entry."
-;;      (cond
-;;       ((and (eq major-mode 'org-mode)
-;;             (org-at-heading-p))
-;;        (org-show-entry)
-;;        (org-reveal t))
-;;       ((bound-and-true-p outline-minor-mode))
-;;        (outline-show-entry)))
-;;     
-;;    (add-hook 'logos-page-motion-hook #'my-logos--reveal)
+;; The `logos-focus-mode' tweaks the aesthetics of the current buffer.
+;; When enabled it sets the buffer-local value of these user options:
+;; `logos-scroll-lock', `logos-variable-pitch',`logos-hide-mode-line'.
 ;;
 ;; Logos is the familiar word derived from Greek (watch my presentation
 ;; on philosophy about Cosmos, Logos, and the living universe:
@@ -88,6 +58,9 @@
 ;;
 ;; 1. ^L Only Generates Ostensible Slides
 ;; 2. Logos Optionally Garners Outline Sections
+;;
+;; Consult the manual for all sorts of tweaks and extras:
+;; <https://protesilaos.com/emacs/logos>.
 
 ;;; Code:
 
@@ -265,7 +238,10 @@ If narrowing is in effect, widen the view."
 ;;;; Optional "focus mode" and utilities
 
 (define-minor-mode logos-focus-mode
-  "Buffer-local mode for focused editing."
+  "Buffer-local mode for focused editing.
+When enabled it sets the buffer-local value of these user
+options: `logos-scroll-lock', `logos-variable-pitch',
+`logos-hide-mode-line'."
   :init-value nil
   :global nil
   :lighter " Λ" ; lambda majuscule
