@@ -64,10 +64,13 @@ modify this GNU manual.”
 :CUSTOM_ID: h:77518cc5-a7f4-4c5e-9c0f-7cf0f43b6317
 :END:
 
-With all user options disabled (the out-of-the-box design), this package
-provides a simple approach to handling presentations using nothing but
-the ~page-delimiter~ together with two commands to move between pages
-whether narrowing is in effect or not.
+This package provides a simple "focus mode" which can be applied to any
+buffer for reading, writing, or even doing a presentation.  The buffer
+can be divided in pages using the ~page-delimiter~, outline structure,
+or any other pattern.  Commands are provided to move between those
+pages.  These motions work even when narrowing is in effect (and they
+preserve it).  =logos.el= is designed to be simple by default and easy
+to extend.  This manual provides concrete examples to that end.
 
 #+vindex: logos-outlines-are-pages
 #+vindex: logos-outline-regexp-alist
@@ -90,8 +93,8 @@ want:
 #+end_src
 
 On stanard Emacs, those key bindings are: =C-x n n=, =C-x ]=, =C-x [=.
-The ~logos-narrow-dwim~ is not necessary if you already know how to
-narrow effectively.
+The ~logos-narrow-dwim~ is not necessary for users who already know how
+to narrow effectively.  Such users may still want to bind it to a key.
 
 #+findex: logos-focus-mode
 #+vindex: logos-hide-mode-line

@@ -1,4 +1,4 @@
-;;; logos.el --- Simple presentations with page breaks or outlines -*- lexical-binding: t -*-
+;;; logos.el --- Simple focus mode and extras -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2022  Free Software Foundation, Inc.
 
@@ -24,27 +24,23 @@
 
 ;;; Commentary:
 ;;
-;; With all user options disabled (the out-of-the-box design), this
-;; package provides a simple approach to handling presentations using
-;; nothing but the `page-delimiter' together with some commands to move
-;; between pages whether narrowing is in effect or not.
+;; This package provides a simple "focus mode" which can be applied to
+;; any buffer for reading, writing, or even doing a presentation.  The
+;; buffer can be divided in pages using the `page-delimiter', outline
+;; structure, or any other pattern.  Commands are provided to move
+;; between those pages.  These motions work even when narrowing is in
+;; effect (and they preserve it).  `logos.el' is designed to be simple
+;; by default and easy to extend.  This manual provides concrete
+;; examples to that end.
 ;;
-;; What constitutes a page delimiter is determined by the user options
-;; `logos-outlines-are-pages' and `logos-outline-regexp-alist'.  By
-;; default, this only corresponds to the ^L character (which can be
-;; inserted using the standard keys with C-q C-l).
-;;
-;; Logos does not define any key bindings.  Try something like this, if
-;; you want:
+;; Logos does not define any key bindings.  Try something like this:
 ;;
 ;;     (let ((map global-map))
 ;;       (define-key map [remap narrow-to-region] #'logos-narrow-dwim)
 ;;       (define-key map [remap forward-page] #'logos-forward-page-dwim)
 ;;       (define-key map [remap backward-page] #'logos-backward-page-dwim))
 ;;
-;; By default those key bindings are: C-x n n, C-x ], C-x [.  The
-;; `logos-narrow-dwim' is not necessary if you already know how to
-;; narrow effectively.
+;; By default those key bindings are: C-x n n, C-x ], C-x [.
 ;;
 ;; The `logos-focus-mode' tweaks the aesthetics of the current buffer.
 ;; When enabled it sets the buffer-local value of these user options:
@@ -67,7 +63,7 @@
 ;;;; General utilities
 
 (defgroup logos ()
-  "Simple presentations with page breaks."
+  "Simple focus mode and extras."
   :group 'editing)
 
 (defcustom logos-outlines-are-pages nil
