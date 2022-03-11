@@ -286,7 +286,7 @@ placement invoke the ~recenter~ function with a numeric argument.
   "Use `recenter' to reposition the view at the top."
   (recenter 0))
 
-(add-hook 'logos-page-motion-hook #'my-logos--recenter-top))
+(add-hook 'logos-page-motion-hook #'my-logos--recenter-top)
 #+end_src
 
 The =0= argument refers to the topmost line.  So =1= points to the line
