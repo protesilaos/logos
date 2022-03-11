@@ -56,30 +56,29 @@
 ;; To position the buffer in the center of the window, use the
 ;; `olivetti' package by Paul W. Rankin.  Sample glue code:
 ;;
-;;     (defun my-logos--olivetti-mode ()
-;;       "Toggle `olivetti-mode'."
-;;       (if (or (bound-and-true-p olivetti-mode)
-;;               (null (logos--focus-p)))
-;;           (olivetti-mode -1)
-;;         (olivetti-mode 1)))
-;;     
-;;     (add-hook 'logos-focus-mode-hook #'my-logos--olivetti-mode)
+;;    (defun my-logos--olivetti-mode ()
+;;      "Toggle `olivetti-mode'."
+;;      (if (or (bound-and-true-p olivetti-mode)
+;;              (null (logos--focus-p)))
+;;          (olivetti-mode -1)
+;;        (olivetti-mode 1)))
+;;    
+;;    (add-hook 'logos-focus-mode-hook #'my-logos--olivetti-mode)
 ;;
 ;; To automatically expand contracted Org/Outline headings, use
 ;; something like:
 ;;
-;;     (defun my-logos--reveal ()
-;;       "Reveal Org or Outline entry."
-;;       (cond
-;;        ((and (eq major-mode 'org-mode)
-;;              (org-at-heading-p))
-;;         (org-show-entry)
-;;         (org-reveal t))
-;;        ((or (bound-and-true-p prot-outline-minor-mode)
-;;             (bound-and-true-p outline-minor-mode))
-;;         (outline-show-entry))))
+;;    (defun my-logos--reveal ()
+;;      "Reveal Org or Outline entry."
+;;      (cond
+;;       ((and (eq major-mode 'org-mode)
+;;             (org-at-heading-p))
+;;        (org-show-entry)
+;;        (org-reveal t))
+;;       ((bound-and-true-p outline-minor-mode))
+;;        (outline-show-entry)))
 ;;     
-;;     (add-hook 'logos-page-motion-hook #'my-logos--reveal)
+;;    (add-hook 'logos-page-motion-hook #'my-logos--reveal)
 ;;
 ;; Logos is the familiar word derived from Greek (watch my presentation
 ;; on philosophy about Cosmos, Logos, and the living universe:

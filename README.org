@@ -230,9 +230,8 @@ changes out-of-the-box:
          (org-at-heading-p))
     (org-show-entry)
     (org-reveal t))
-   ((or (bound-and-true-p prot-outline-minor-mode)
-        (bound-and-true-p outline-minor-mode))
-    (outline-show-entry))))
+   ((bound-and-true-p outline-minor-mode))
+    (outline-show-entry)))
 
 (add-hook 'logos-page-motion-hook #'my-logos--reveal)
 #+end_src
