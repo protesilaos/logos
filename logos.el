@@ -97,17 +97,15 @@ the latter."
   "When non-nil hide the modeline.
 This is only relevant when `logos-focus-mode' is enabled."
   :type 'boolean
-  :group 'logos)
-
-(make-variable-buffer-local 'logos-hide-mode-line)
+  :group 'logos
+  :local t)
 
 (defcustom logos-scroll-lock nil
   "When non-nil, use `scroll-lock-mode'.
 This is only relevant when `logos-focus-mode' is enabled."
   :type 'boolean
-  :group 'logos)
-
-(make-variable-buffer-local 'logos-scroll-lock)
+  :group 'logos
+  :local t)
 
 (defcustom logos-variable-pitch nil
   "When non-nil, `text-mode' buffers use `variable-pitch-mode'.
@@ -116,9 +114,8 @@ assumed to be a monospaced typeface.
 
 This is only relevant when `logos-focus-mode' is enabled."
   :type 'boolean
-  :group 'logos)
-
-(make-variable-buffer-local 'logos-variable-pitch)
+  :group 'logos
+  :local t)
 
 ;;;; General utilities
 
