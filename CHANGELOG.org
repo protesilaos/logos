@@ -10,16 +10,19 @@ tagged commit on the project's main git repository:
 The newest release is at the top.  For further details, please consult
 the manual: <https://protesilaos.com/emacs/logos>.
 
-* Version 0.1.0 on N/A
+* Version 0.1.0 on 2022-03-11
 :PROPERTIES:
 :CUSTOM_ID: h:ca03557f-35c1-4342-b126-d08fd855dbf4
 :END:
 
-In the beginning, there was =prot-logos.el=.  A file that loaded some
-configurations I had for presentations (part of [[https://gitlab.com/protesilaos/dotfiles][my dotfiles]]).  On
-2022-03-02 I decided to take the code out of my personal setup and turn
-it into a package.  It occured to me that "logos" is a nice word though
-it might be a bit dull for an Emacs package, so I coined the backcronyms
-"^L Only Generates Ostensible Slides" and "Logos Optionally Garners
-Outline Sections", which hopefully describe what this is all about.
+In the beginning, there was =prot-logos.el=.  A file that pieced
+together some code and configurations I had for presentations (part of
+[[https://gitlab.com/protesilaos/dotfiles][my dotfiles]]).  On 2022-03-02 I decided to take the code out of my
+personal setup and turn it into a general purpose package.
+
+It occured to me that "logos" is a nice word though it might be a bit
+dull for an Emacs package, so I coined the backcronyms "^L Only
+Generates Ostensible Slides" and "Logos Optionally Garners Outline
+Sections", which hopefully describe what this is all about.
+
 Read the manual for the technicalities.
