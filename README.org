@@ -5,9 +5,9 @@
 #+options: ':t toc:nil author:t email:t num:t
 #+startup: content
 
-#+macro: stable-version N/A
-#+macro: release-date N/A
-#+macro: development-version 0.1.0-dev
+#+macro: stable-version 0.1.0
+#+macro: release-date 2022-03-11
+#+macro: development-version 0.2.0-dev
 #+macro: file @@texinfo:@file{@@$1@@texinfo:}@@
 #+macro: space @@texinfo:@: @@
 #+macro: kbd @@texinfo:@kbd{@@$1@@texinfo:}@@
@@ -66,7 +66,7 @@ modify this GNU manual.”
 
 With all user options disabled (the out-of-the-box design), this package
 provides a simple approach to handling presentations using nothing but
-the ~page-delimiter~ together with some commands to move between pages
+the ~page-delimiter~ together with two commands to move between pages
 whether narrowing is in effect or not.
 
 #+vindex: logos-outlines-are-pages
@@ -89,9 +89,9 @@ want:
   (define-key map [remap backward-page] #'logos-backward-page-dwim))
 #+end_src
 
-By default those key bindings are: =C-x n n=, =C-x ]=, =C-x [=.  The
-~logos-narrow-dwim~ is not necessary if you already know how to narrow
-effectively.
+On stanard Emacs, those key bindings are: =C-x n n=, =C-x ]=, =C-x [=.
+The ~logos-narrow-dwim~ is not necessary if you already know how to
+narrow effectively.
 
 #+findex: logos-focus-mode
 #+vindex: logos-hide-mode-line
@@ -103,21 +103,6 @@ the mode line (~logos-hide-mode-line~), enable ~scroll-lock-mode~
 (~logos-scroll-lock~), and use ~variable-pitch-mode~ in non-programming
 buffers (~logos-variable-pitch~).  All these variables are
 buffer-local.
-
-To position the buffer in the center of the window, use the =olivetti=
-package by Paul W. Rankin.  Sample glue code:
-
-#+begin_src emacs-lisp
-;; glue code for `logos-focus-mode' and `olivetti-mode'
-(defun my-logos--olivetti-mode ()
-  "Toggle `olivetti-mode'."
-  (if (or (bound-and-true-p olivetti-mode)
-          (null (logos--focus-p)))
-      (olivetti-mode -1)
-    (olivetti-mode 1)))
-
-(add-hook 'logos-focus-mode-hook #'my-logos--olivetti-mode)
-#+end_src
 
 Logos is the familiar word derived from Greek (watch my presentation on
 philosophy about Cosmos, Logos, and the living universe:
@@ -172,7 +157,7 @@ Everything is in place to set up the package.
 #+cindex: Package configuration
 
 Logos does not bind its own keys and does not make any opinionated
-changes out-of-the-box:
+changes out-of-the-box ([[#h:2bb57369-352a-43bf-afe3-0bed2fcc7359][Extra tweaks]]):
 
 + To get the do-what-I-mean page motions add your own key bindings.  In
   the example below, they take the stead of ~forward-page~ (=C-x ]=) and
@@ -187,13 +172,10 @@ changes out-of-the-box:
   Note that everything is buffer-local, so it is possible to use file
   variables as described in the Emacs manual.
 
-+ If you want to center the buffer in its window, use the =olivetti=
-  package by Paul W. Rankin and simply apply some glue code to activate
-  ~olivetti-mode~ when ~logos-focus-mode~ is active.
-
 #+begin_src emacs-lisp
 (require 'logos)
 
+;; If you want to use outlines instead of page breaks (the ^L)
 (setq logos-outlines-are-pages t)
 (setq logos-outline-regexp-alist
       `((emacs-lisp-mode . "^;;;+ ")
@@ -211,7 +193,29 @@ changes out-of-the-box:
   (define-key map [remap forward-page] #'logos-forward-page-dwim)
   (define-key map [remap backward-page] #'logos-backward-page-dwim)
   (define-key map (kbd "<f9>") #'logos-focus-mode))
+#+end_src
 
+* Extra tweaks
+:PROPERTIES:
+:CUSTOM_ID: h:2bb57369-352a-43bf-afe3-0bed2fcc7359
+:END:
+#+cindex: User-level configurations and glue code
+
+This section contains snippets of code that extend the functionality of
+=logos=.  These either apply to ~logos-focus-mode~ or enhance the page
+motions through the ~logos-page-motion-hook~.
+
+** Center the buffer in its window
+:PROPERTIES:
+:CUSTOM_ID: h:8864fb36-53d6-40a2-8e0a-2c609e06d70f
+:END:
+#+cindex: Automatically toggle olivetti-mode
+
+Use the excellent =olivetti= package by Paul W. Rankin.  Here we
+configure Olivetti to take effect when we enter ~logos-focus-mode~ and
+be disabled when we exit.
+
+#+begin_src emacs-lisp
 ;; glue code for `logos-focus-mode' and `olivetti-mode'
 (defun my-logos--olivetti-mode ()
   "Toggle `olivetti-mode'."
@@ -221,19 +225,131 @@ changes out-of-the-box:
     (olivetti-mode 1)))
 
 (add-hook 'logos-focus-mode-hook #'my-logos--olivetti-mode)
+#+end_src
 
+** Automatically reveal Org or Outline heading
+:PROPERTIES:
+:CUSTOM_ID: h:e18f828f-f9a8-4821-b73b-46793be57abb
+:END:
+#+cindex: Always show the Org or Outline subtree or entry
+
+The Logos page motions simply jump between positions.  If the heading is
+folded, they will keep it that way.  To always reveal the contents use
+something like this:
+
+#+begin_src emacs-lisp
 ;; glue code to expand an Org/Outline heading
 (defun my-logos--reveal ()
   "Reveal Org or Outline entry."
   (cond
    ((and (eq major-mode 'org-mode)
          (org-at-heading-p))
-    (org-show-entry)
-    (org-reveal t))
-   ((bound-and-true-p outline-minor-mode))
-    (outline-show-entry)))
+    (org-show-subtree))
+   ((or (bound-and-true-p prot-outline-minor-mode)
+        (bound-and-true-p outline-minor-mode))
+    (outline-show-subtree))))
 
 (add-hook 'logos-page-motion-hook #'my-logos--reveal)
+#+end_src
+
+Notice that it applies to the entire subtree (heading and subheadings).
+If the intent is to reveal just the current heading, replace
+~org-show-subtree~ and ~outline-show-subtree~ with ~org-show-entry~ and
+~outline-show-entry~.
+
+** Recenter at the top upon page motion
+:PROPERTIES:
+:CUSTOM_ID: h:bba965c6-7451-4c76-84d6-7e03c99ed546
+:END:
+#+cindex: Reposition the point at the top of the page
+
+Page motions normally reposition the point at the centre of the window
+if necessary (this is standard Emacs behaviour).  To always change the
+placement invoke the ~recenter~ function with a numeric argument.
+
+#+begin_src emacs-lisp
+;; place point at the top when changing pages
+(defun my-logos--recenter-top ()
+  "Use `recenter' to reposition the view at the top."
+  (recenter 0))
+
+(add-hook 'logos-page-motion-hook #'my-logos--recenter-top))
+#+end_src
+
+The =0= argument refers to the topmost line.  So =1= points to the line
+below and so on.
+
+If the recentering should not affect specific modes, tweak the function
+accordingly:
+
+#+begin_src emacs-lisp
+(defvar my-logos-no-recenter-top-modes 
+  '(emacs-lisp-mode lisp-interaction-mode))
+
+(defun my-logos--recenter-top ()
+  "Use `recenter' to reposition the view at the top."
+  (unless (memq major-mode my-logos-no-recenter-top-modes)
+    (recenter 0)))
+#+end_src
+
+Or simply exclude all programming modes:
+
+#+begin_src emacs-lisp
+(defun my-logos--recenter-top ()
+  "Use `recenter' to reposition the view at the top."
+  (unless (derived-mode-p 'prog-mode)
+    (recenter 0)))
+#+end_src
+
+** Use outlines and page breaks
+:PROPERTIES:
+:CUSTOM_ID: h:3464ada8-c55d-4179-9d54-c2f87e284ac7
+:END:
+#+cindex: Outline headings and page delimiters together
+
+By default, the page motions only move between the =^L= delimiters.
+While the option ~logos-outlines-are-pages~ changes the behaviour to
+move between outline headings instead.  What constitutes an "outline
+heading" is determined by ~logos-outline-regexp-alist~.
+
+Provided this:
+
+#+begin_src emacs-lisp
+(setq logos-outlines-are-pages t)
+#+end_src
+
+The default value of ~logos-outline-regexp-alist~ will affect ~org-mode~
+and ~emacs-lisp-mode~.
+
+#+begin_src emacs-lisp
+(setq logos-outline-regexp-alist
+      `((emacs-lisp-mode . "^;;;+ ")
+        (org-mode . "^\\*+ +")
+        (t . ,(or outline-regexp logos--page-delimiter))))
+#+end_src
+
+It is possible to tweak those regular expressions to target both the
+outline and the page delimiters:
+
+#+begin_src emacs-lisp
+(setq logos-outline-regexp-alist
+      `((emacs-lisp-mode . ,(format "\\(^;;;+ \\|%s\\)" (default-value 'page-delimiter)))
+        (org-mode . ,(format "\\(^\\*+ +\\|%s\\)" (default-value 'page-delimiter)))
+        (t . ,(or outline-regexp logos--page-delimiter))))
+#+end_src
+
+The form =,(format "\\(^;;;+ \\|%s\\)" logos--page-delimiter)= expands
+to ="\\(^;;;+ \\|^\\)"=.
+
+For Org it may be better to either not target the =^L= or to also target
+the horizontal rule (five hyphens on a line, else the =^-\\{5\\}$=
+pattern).  Putting it all together:
+
+#+begin_src emacs-lisp
+(setq logos-outline-regexp-alist
+      `((emacs-lisp-mode . ,(format "\\(^;;;+ \\|%s\\)" logos--page-delimiter))
+        (org-mode . ,(format "\\(^\\*+ +\\|^-\\{5\\}$\\|%s\\)" logos--page-delimiter))
+        (t . ,(or outline-regexp logos--page-delimiter))))
 #+end_src
 
 * GNU Free Documentation License
