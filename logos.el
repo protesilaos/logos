@@ -88,7 +88,12 @@ When this variable is nil, pages are demarcated by the
     (org-mode . "^\\*+ +")
     (t . ,(or outline-regexp logos--page-delimiter)))
   "Alist of major mode and regular expression of the outline.
-Only used when `logos-outlines-are-pages' is non-nil."
+Only used when `logos-outlines-are-pages' is non-nil.
+
+The major mode also targets any of its derivatives.  For example,
+`lisp-interaction-mode' (the standard scratch buffer) is based on
+`emacs-lisp-mode' so one only needs to set the outline regexp of
+the latter."
   :type `(alist :key-type symbol :value-type string) ; TODO 2022-03-02: ensure symbol is mode?
   :group 'logos)
 
@@ -183,6 +188,22 @@ motion.  Always move point to the beginning of the narrowed
 page."
   (interactive "p")
   (logos--page-motion count :back))
+
+(declare-function org-at-heading-p "org" (&optional _))
+(declare-function org-show-entry "org")
+(declare-function outline-show-entry "outline")
+
+(defun logos--reveal-entry ()
+  "Reveal Org or Outline entry."
+  (cond
+   ((and (eq major-mode 'org-mode)
+         (org-at-heading-p))
+    (org-show-entry))
+   ((or (eq major-mode 'outline-mode)
+        (bound-and-true-p outline-minor-mode))
+    (outline-show-entry))))
+
+(add-hook 'logos-page-motion-hook #'logos--reveal-entry)
 
 ;;;; Narrowing
 ;; NOTE 2022-03-02: This section is most likely unnecessary, but let's

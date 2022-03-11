@@ -227,19 +227,39 @@ be disabled when we exit.
 (add-hook 'logos-focus-mode-hook #'my-logos--olivetti-mode)
 #+end_src
 
-** Automatically reveal Org or Outline heading
+** Automatically reveal Org or Outline subtree
 :PROPERTIES:
 :CUSTOM_ID: h:e18f828f-f9a8-4821-b73b-46793be57abb
 :END:
-#+cindex: Always show the Org or Outline subtree or entry
+#+cindex: Always show the Org or Outline subtree
 
-The Logos page motions simply jump between positions.  If the heading is
-folded, they will keep it that way.  To always reveal the contents use
-something like this:
+The Logos page motions normally jump between positions.  Though Org and
+Outline require that Logos also reveals the headings' contents.  This is
+necessary to avoid invisible motions inside a folded heading that
+contains subheadings.  The unfolding only applies to the current entry.
+This is the relevant snippet from =logos.el=:
+
+#+begin_src emacs-lisp
+(defun logos--reveal-entry ()
+  "Reveal Org or Outline entry."
+  (cond
+   ((and (eq major-mode 'org-mode)
+         (org-at-heading-p))
+    (org-show-entry))
+   ((or (eq major-mode 'outline-mode)
+        (bound-and-true-p outline-minor-mode))
+    (outline-show-entry))))
+
+(add-hook 'logos-page-motion-hook #'logos--reveal-entry)
+#+end_src
+
+Users may prefer to reveal the entire subtree instead of the current
+entry: the heading at point and all of its subheadings.  In this case,
+one may override the definition of ~logos--reveal-entry~:
 
 #+begin_src emacs-lisp
 ;; glue code to expand an Org/Outline heading
-(defun my-logos--reveal ()
+(defun logos--reveal-entry ()
   "Reveal Org or Outline entry."
   (cond
    ((and (eq major-mode 'org-mode)
@@ -248,14 +268,7 @@ something like this:
    ((or (eq major-mode 'outline-mode)
         (bound-and-true-p outline-minor-mode))
     (outline-show-subtree))))
-
-(add-hook 'logos-page-motion-hook #'my-logos--reveal)
 #+end_src
-
-Notice that it applies to the entire subtree (heading and subheadings).
-If the intent is to reveal just the current heading, replace
-~org-show-subtree~ and ~outline-show-subtree~ with ~org-show-entry~ and
-~outline-show-entry~.
 
 ** Recenter at the top upon page motion
 :PROPERTIES:
