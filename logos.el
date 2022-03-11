@@ -130,8 +130,10 @@ This is only relevant when `logos-focus-mode' is enabled."
 
 (defun logos--outline-regexp ()
   "Return page delimiter from `logos-outline-regexp-alist'."
-  (let ((outline logos-outline-regexp-alist))
-    (or (alist-get major-mode outline)
+  (let ((outline logos-outline-regexp-alist)
+        (mode major-mode))
+    (or (alist-get mode outline)
+        (alist-get (get mode 'derived-mode-parent) outline)
         (alist-get t outline))))
 
 (defun logos--page-delimiter ()
