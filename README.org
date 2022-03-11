@@ -1,4 +1,4 @@
-#+title: Simple presentations for Emacs with page breaks or outlines.
+#+title: logos.el: simple focus mode for Emacs with page breaks or outlines
 #+author: Protesilaos Stavrou
 #+email: info@protesilaos.com
 #+language: en
@@ -17,7 +17,7 @@
 #+texinfo_filename: logos.info
 #+texinfo_dir_category: Emacs misc features
 #+texinfo_dir_title: Logos: (logos)
-#+texinfo_dir_desc: Simple presentations with page breaks or outlines
+#+texinfo_dir_desc: Simple focus mode with page breaks or outlines
 #+texinfo_header: @set MAINTAINERSITE @uref{https://protesilaos.com,maintainer webpage}
 #+texinfo_header: @set MAINTAINER Protesilaos Stavrou
 #+texinfo_header: @set MAINTAINEREMAIL @email{info@protesilaos.com}
