@@ -318,8 +318,11 @@ Provided this:
 (setq logos-outlines-are-pages t)
 #+end_src
 
-The default value of ~logos-outline-regexp-alist~ will affect ~org-mode~
-and ~emacs-lisp-mode~.
+The default value of ~logos-outline-regexp-alist~ will affect
+~org-mode~, ~emacs-lisp-mode~, and any of their derivatives
+(e.g. ~lisp-interaction-mode~ (the standard scratch buffer) is based on
+~emacs-lisp-mode~).  Its fallback value is whatever the major mode sets
+as an outline, else the standard =^L=.
 
 #+begin_src emacs-lisp
 (setq logos-outline-regexp-alist
