@@ -6,6 +6,7 @@
 ;; URL: https://gitlab.com/protesilaos/logos
 ;; Version: 0.1.2
 ;; Package-Requires: ((emacs "27.1"))
+;; Keywords: convenience, focus, writing, presentation, narrowing
 
 ;; This file is NOT part of GNU Emacs.
 
