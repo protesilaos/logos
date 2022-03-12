@@ -119,13 +119,24 @@ backronyms about the mechanics of this package:
 :PROPERTIES:
 :CUSTOM_ID: h:b0e78fe5-4e74-4959-be6f-10f7b631d5a0
 :END:
-#+cindex: Installation
+#+cindex: Installation instructions
 
-Logos is not in any package archive for the time being, though I plan to
-submit it to GNU ELPA (as such, any non-trivial patches require
-copyright assignment to the Free Software Foundation).  Users can rely
-on =straight.el=, =quelpa=, or equivalent to fetch the source.  Below
-are the essentials for those who prefer the manual method.
+** GNU ELPA package
+:PROPERTIES:
+:CUSTOM_ID: h:35926213-4825-4933-932c-5183628d25ac
+:END:
+
+The package is available as =logos=.  Simply do:
+
+: M-x package-refresh-contents
+: M-x package-install
+
+And search for it.
+
+** Manual installation
+:PROPERTIES:
+:CUSTOM_ID: h:d9184e23-5a20-4efa-a8c4-1dfdd1e23dbe
+:END:
 
 Assuming your Emacs files are found in =~/.emacs.d/=, execute the
 following commands in a shell prompt:
