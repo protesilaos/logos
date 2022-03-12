@@ -184,6 +184,7 @@ page."
 
 (declare-function org-at-heading-p "org" (&optional _))
 (declare-function org-show-entry "org")
+(declare-function outline-on-heading-p "outline" (&optional invisible-ok))
 (declare-function outline-show-entry "outline")
 
 (defun logos--reveal-entry ()
@@ -192,8 +193,9 @@ page."
    ((and (eq major-mode 'org-mode)
          (org-at-heading-p))
     (org-show-entry))
-   ((or (eq major-mode 'outline-mode)
-        (bound-and-true-p outline-minor-mode))
+   ((and (or (eq major-mode 'outline-mode)
+             (bound-and-true-p outline-minor-mode))
+         (outline-on-heading-p))
     (outline-show-entry))))
 
 (add-hook 'logos-page-motion-hook #'logos--reveal-entry)
