@@ -346,7 +346,7 @@ Or simply exclude all programming modes:
 By default, the page motions only move between the =^L= delimiters.
 While the option ~logos-outlines-are-pages~ changes the behaviour to
 move between outline headings instead.  What constitutes an "outline
-heading" is determined by ~logos-outline-regexp-alist~.
+heading" is determined by the ~logos-outline-regexp-alist~.
 
 Provided this:
 
