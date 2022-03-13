@@ -391,6 +391,20 @@ pattern).  Putting it all together:
         (t . ,(or outline-regexp logos--page-delimiter))))
 #+end_src
 
+Another Org-specific tweak is to use heading levels up to a specific
+number.  The idea would be that anything below that number is not
+significant.  For example, =^\\* += only applies to top-level headings,
+while =^\\*\\{1,3\\} += covers heading levels 1 through 3.  Accounting
+for the aforementiond horizontal rle and generic page delimiter, the end
+result can look like this:
+
+#+begin_src emacs-lisp
+(setq logos-outline-regexp-alist
+      `((emacs-lisp-mode . ,(format "\\(^;;;+ \\|%s\\)" logos--page-delimiter))
+        (org-mode . ,(format "\\(^\\*\\{1,3\\} +\\|^-\\{5\\}$\\|%s\\)" logos--page-delimiter))
+        (t . ,(or outline-regexp logos--page-delimiter))))
+#+end_src
+
 * GNU Free Documentation License
 :PROPERTIES:
 :APPENDIX: t
