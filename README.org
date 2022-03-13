@@ -112,6 +112,9 @@ buffers (~logos-variable-pitch~), make the buffer read-only
 =olivetti= package is installed (~logos-olivetti~).  All these variables
 are buffer-local.
 
+[ User options have changed as part of {{{development-version}}}.
+  Especially the glue code for Olivetti. ]
+
 Logos is the familiar word derived from Greek (watch my presentation on
 philosophy about Cosmos, Logos, and the living universe:
 <https://protesilaos.com/books/2022-02-05-cosmos-logos-living-universe/>),
@@ -193,6 +196,9 @@ changes out-of-the-box ([[#h:2bb57369-352a-43bf-afe3-0bed2fcc7359][Extra tweaks]
   everything is buffer-local, so it is possible to use file variables as
   described in the Emacs manual.
 
+[ User options have changed as part of {{{development-version}}}.
+  Especially the glue code for Olivetti. ]
+
 #+begin_src emacs-lisp
 (require 'logos)
 
@@ -234,6 +240,8 @@ motions through the ~logos-page-motion-hook~.
 :CUSTOM_ID: h:8864fb36-53d6-40a2-8e0a-2c609e06d70f
 :END:
 #+cindex: Automatically toggle olivetti-mode
+
+[ Changed as part of {{{development-version}}} ]
 
 Install the excellent =olivetti= package by Paul W. Rankin.  Then set
 ~logos-olivetti~ to non-nil.
