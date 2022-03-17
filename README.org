@@ -91,7 +91,7 @@ want:
   (define-key map [remap backward-page] #'logos-backward-page-dwim))
 #+end_src
 
-On stanard Emacs, those key bindings are: =C-x n n=, =C-x ]=, =C-x [=.
+On standard Emacs, those key bindings are: =C-x n n=, =C-x ]=, =C-x [=.
 The ~logos-narrow-dwim~ is not necessary for users who already know how
 to narrow effectively.  Such users may still want to bind it to a key.
 
