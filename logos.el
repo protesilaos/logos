@@ -45,7 +45,9 @@
 ;;
 ;; The `logos-focus-mode' tweaks the aesthetics of the current buffer.
 ;; When enabled it sets the buffer-local value of these user options:
-;; `logos-scroll-lock', `logos-variable-pitch',`logos-hide-mode-line'.
+;; `logos-scroll-lock', `logos-variable-pitch',`logos-hide-mode-line',
+;; `logos-indicate-buffer-boundaries', `logos-buffer-read-only', and
+;; `logos-olivetti'.
 ;;
 ;; Logos is the familiar word derived from Greek (watch my presentation
 ;; on philosophy about Cosmos, Logos, and the living universe:
