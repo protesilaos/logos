@@ -10,6 +10,57 @@ tagged commit on the project's main git repository:
 The newest release is at the top.  For further details, please consult
 the manual: <https://protesilaos.com/emacs/logos>.
 
+* Version 0.2.0 on 2022-03-17
+:PROPERTIES:
+:CUSTOM_ID: h:c7f4f53d-0397-4586-8b21-e9b26dddf6e9
+:END:
+
+All functions or variables referenced herein have documentation strings
+and are also documented in the manual.
+
++ Implemented the user option ~logos-olivetti~ which is a buffer-local
+  variable that is read when ~logos-focus-mode~ is enabled.  This
+  provides the glue code to integrate Logos with =olivetti=.  Olivetti
+  is a package by Paul W. Rankin which centres the contents of the
+  buffer in its window.
+
++ Removed the do-it-yourself snippet that was present in the manual for
+  piecing together Logos and Olivetti.  The documentation has been
+  updated accordingly.  Users who followed the old method are advised to
+  review their configurations.
+
++ Abstracted the state handling of the variables and modes that are
+  affected by ~logos-focus-mode~, based on feedback by Daniel Mendler.
+  This improves how the code is written and makes it easier to extend
+  it.
+
++ Introduced the user options ~logos-indicate-buffer-boundaries~ and
+  ~logos-buffer-read-only~.  Both are buffer-local and both take effect
+  when ~logos-focus-mode~ is enabled.  The former controls the
+  ~indicate-buffer-boundaries~ while the latter determines whether the
+  buffer should be put in a read-only mode.
+
++ Changed how user options are declared as buffer-local, by using the
+  appropriate keyword of ~defcustom~.  Thanks to Philip Kaludercic for
+  the patch, which was sent via email.
+
++ Wrote a node entry on how to write a regular expression that targets
+  only specific Org heading levels.  This pertains to user options
+  ~logos-outlines-are-pages~ and ~logos-outline-regexp-alist~.
+
++ Added keywords to the package metadata to help its discoverability.
+
++ Fixed typo in a function's doc string.  Thanks to Remco van 't Veer
+  for the contribution in merge request 1:
+  <https://gitlab.com/protesilaos/logos/-/merge_requests/1>.
+
++ Fixed typo in the manual.  Thanks to user Ypot for the contribution in
+  merge request 2:
+  <https://gitlab.com/protesilaos/logos/-/merge_requests/2>.
+
++ Appended an "Acknowledgements" section in the manual, which references
+  the names of everyone involved in the development of this package.
+
 * Version 0.1.0 on 2022-03-11
 :PROPERTIES:
 :CUSTOM_ID: h:ca03557f-35c1-4342-b126-d08fd855dbf4
