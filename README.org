@@ -413,6 +413,21 @@ result can look like this:
         (t . ,(or outline-regexp logos--page-delimiter))))
 #+end_src
 
+* Acknowledgements
+:PROPERTIES:
+:CUSTOM_ID: h:300c12cb-853e-4e06-9627-e1d6fd3a3a38
+:END:
+#+cindex: Contributors
+
+Logos is meant to be a collective effort.  Every bit of help matters.
+
++ Author/maintainer :: Protesilaos Stavrou.
+
++ Contributions to code or the manual :: Philip Kaludercic, Remco van 't
+  Veer, and user Ypot.
+
++ Ideas and user feedback :: Daniel Mendler.
+
 * GNU Free Documentation License
 :PROPERTIES:
 :APPENDIX: t
