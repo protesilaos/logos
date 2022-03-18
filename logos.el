@@ -306,7 +306,8 @@ alternate, thus toggling MODE."
   "Buffer-local mode for focused editing.
 When enabled it sets the buffer-local value of these user
 options: `logos-scroll-lock', `logos-variable-pitch',
-`logos-hide-mode-line'."
+`logos-hide-mode-line', `logos-indicate-buffer-boundaries',
+`logos-buffer-read-only', `logos-olivetti'."
   :init-value nil
   :global nil
   :lighter " Λ" ; lambda majuscule
