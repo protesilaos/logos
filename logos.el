@@ -166,11 +166,34 @@ This is only relevant when `logos-focus-mode' is enabled."
 
 (defun logos--narrow-to-page (count &optional back)
   "Narrow to COUNTth page with optional BACK motion."
+  ;; Position point to avoid skipping pages.
+  (when (and (buffer-narrowed-p)
+             (save-restriction
+               (widen)
+               (looking-at page-delimiter)))
+    (goto-char (if back
+                   (1+ (match-end 0))
+                 (1- (match-beginning 0)))))
   (if back
       (narrow-to-page (or (- count) -1))
     (narrow-to-page (or (abs count) 1)))
-  ;; Avoids the problem of skipping pages while cycling back and forth.
-  (goto-char (point-min)))
+  (let ((page-start (point-min-marker)))
+    ;; If outlines are pages, include match of page-delimiter in page
+    (when (and logos-outlines-are-pages
+               (save-excursion
+                 (goto-char (point-min))
+                 (save-restriction
+                   (widen)
+                   (looking-back page-delimiter (line-beginning-position)))))
+      (let ((match-start (match-beginning 0))
+            (page-end (point-max-marker)))
+        (widen)
+        (narrow-to-region match-start page-end)))
+    ;; Leave point at a standard location: if outlines are pages,
+    ;; leave it right after the page-delimiter (to match the
+    ;; unnarrowed behavior); if outlines are not pages, leave it at
+    ;; the beginning of the page.
+    (goto-char page-start)))
 
 (defvar logos-page-motion-hook nil
   "Hook that runs after a page motion.
@@ -272,7 +295,10 @@ If narrowing is in effect, widen the view."
          (null (buffer-narrowed-p)))
     (narrow-to-region (region-beginning) (region-end)))
    ((logos--page-p)
-    (narrow-to-page))
+    ;; Use our own narrow to page function because when
+    ;; logos-outlines-are-pages is t, the page delimiter
+    ;; is included in the region narrowed to.
+    (logos--narrow-to-page 0))
    ((null (buffer-narrowed-p))
     (logos-narrow-visible-window))
    ((widen))))
