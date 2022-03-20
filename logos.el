@@ -182,8 +182,6 @@ With optional numeric COUNT move by that many pages.  With
 optional BACK perform the motion backwards."
   (let ((cmd (if back #'backward-page #'forward-page)))
     (logos--page-delimiter)
-    (when (eq (point) (point-max))
-      (forward-char -1))
     (if (buffer-narrowed-p)
         (logos--narrow-to-page count back)
       (funcall cmd count)
