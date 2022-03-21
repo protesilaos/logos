@@ -415,8 +415,8 @@ Logos is meant to be a collective effort.  Every bit of help matters.
 
 + Author/maintainer :: Protesilaos Stavrou.
 
-+ Contributions to code or the manual :: Philip Kaludercic, Remco van 't
-  Veer, and user Ypot.
++ Contributions to code or the manual :: Daniel Mendler, Omar Antolín
+  Camarena, Philip Kaludercic, Remco van 't Veer, and user Ypot.
 
 + Ideas and user feedback :: Daniel Mendler.
 
