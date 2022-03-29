@@ -259,8 +259,9 @@ page."
   "Return non-nil if there is a `page-delimiter' in the buffer.
 This function does not use `widen': it only checks the accessible
 portion of the buffer."
-  (or (save-excursion (re-search-forward page-delimiter nil t))
-      (save-excursion (re-search-backward page-delimiter nil t))))
+  (let ((delimiter (logos--page-delimiter)))
+    (or (save-excursion (re-search-forward delimiter nil t))
+        (save-excursion (re-search-backward delimiter nil t)))))
 
 (defun logos-narrow-visible-window ()
   "Narrow buffer to visible window area.
