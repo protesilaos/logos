@@ -10,6 +10,46 @@ tagged commit on the project's main git repository:
 The newest release is at the top.  For further details, please consult
 the manual: <https://protesilaos.com/emacs/logos>.
 
+* Version 0.3.0 on 2022-03-30
+:PROPERTIES:
+:CUSTOM_ID: h:1c2f2cf0-7617-4bb6-9525-eafa1269d06f
+:END:
+
+This release basically contains one major refinement about how buffer
+narrowing is handled.  In detail:
+
+1. If ~logos-outlines-are-pages~ is non-nil, it now includes the match
+   of the ~page-delimiter~ regexp in the narrowed region and leaves
+   point right after the ~page-delimiter~---so in Org mode, after the
+   stars.  (It is better to leave point there than at the very beginning
+   of the narrowed buffer to match the behavior of
+   ~logos-forward-page-dwim~ when the buffer is not narrowed.)  The
+   inclusion of the delimiter helps retain any folding functionality
+   associated with that line (e.g. Org headings).
+
+2. To avoid skipping pages in the narrowed case when point is at their
+   outer boundaries, =logos= checks if you are right at the start of a
+   ~page-delimiter~ and if so moves past the delimiter in the opposite
+   direction of the given motion: so if you are moving back, it puts you
+   after the delimiter, and if you are moving forward it puts you before
+   the delimiter.  (The bug was that if the point was at ~point-max~
+   while narrowed and moving forward, it would skip past a page and the
+   same in the opposite direction with ~point-min~.)
+
+3. Changed ~logos-narrow-dwim~ to call ~logos--narrow-to-page~ instead
+   of ~narrow-to-page~, so that it too includes the ~page-delimiter~
+   match in the page.
+
+4. The ~logos--page-p~ now always checks for the right delimiter, which
+   may be that of the outline if ~logos-outlines-are-pages~ is non-nil.
+   Whereas before it was hard-coded to the generic ~page-delimiter~.
+
+Thanks to Omar Antolín Camarena for commit
+=8c2e85033db982ef13a5e041012dc45d86d9de32= which covers the first three
+of the aforementioned points.  The contribution was sent as a patch via
+email.  Omar has already assigned copyright to the Free Software
+Foundation.
+
 * Version 0.2.0 on 2022-03-17
 :PROPERTIES:
 :CUSTOM_ID: h:c7f4f53d-0397-4586-8b21-e9b26dddf6e9
