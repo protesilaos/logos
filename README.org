@@ -238,8 +238,7 @@ motions through the ~logos-page-motion-hook~.
 Install the excellent =olivetti= package by Paul W. Rankin.  Then set
 ~logos-olivetti~ to non-nil.
 
-The present author's favourite settings given that a ~fill-column~ of
-=72=:
+The present author's favourite settings given a ~fill-column~ of =72=:
 
 #+begin_src emacs-lisp
 (setq olivetti-body-width 0.7
