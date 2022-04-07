@@ -157,7 +157,7 @@ mkdir manual-packages
 cd manual-packages
 
 # Clone this repo, naming it "logos"
-git clone https://gitlab.com/protesilaos/logos.git logos
+git clone https://git.sr.ht/~protesilaos/logos logos
 #+end_src
 
 Finally, in your =init.el= (or equivalent) evaluate this:
