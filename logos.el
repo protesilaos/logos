@@ -83,7 +83,7 @@ When this variable is nil, pages are demarcated by the
 (defconst logos--page-delimiter (default-value 'page-delimiter)
   "The default value of `page-delimiter'.")
 
-(defcustom logos-outline-regexp-alist   ; TODO 2022-03-02: more sensible outlines?
+(defcustom logos-outline-regexp-alist
   `((emacs-lisp-mode . "^;;;+ ")
     (org-mode . "^\\*+ +")
     (markdown-mode . "^\\#+ +")
