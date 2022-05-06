@@ -209,6 +209,7 @@ changes out-of-the-box ([[#h:2bb57369-352a-43bf-afe3-0bed2fcc7359][Extra tweaks]
 (setq logos-outline-regexp-alist
       `((emacs-lisp-mode . "^;;;+ ")
         (org-mode . "^\\*+ +")
+        (markdown-mode . "^\\#+ +")
         (t . ,(or outline-regexp logos--page-delimiter))))
 
 ;; These apply when `logos-focus-mode' is enabled.  Their value is

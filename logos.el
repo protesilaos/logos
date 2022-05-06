@@ -86,6 +86,7 @@ When this variable is nil, pages are demarcated by the
 (defcustom logos-outline-regexp-alist   ; TODO 2022-03-02: more sensible outlines?
   `((emacs-lisp-mode . "^;;;+ ")
     (org-mode . "^\\*+ +")
+    (markdown-mode . "^\\#+ +")
     (t . ,(or outline-regexp logos--page-delimiter)))
   "Alist of major mode and regular expression of the outline.
 Only used when `logos-outlines-are-pages' is non-nil.
