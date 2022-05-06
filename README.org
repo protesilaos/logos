@@ -103,7 +103,7 @@ to narrow effectively.  Such users may still want to bind it to a key.
 #+vindex: logos-hide-mode-line
 #+vindex: logos-scroll-lock
 #+vindex: logos-variable-pitch
-#+vindex: logos-indicate-buffer-boundaries
+#+vindex: logos-hide-buffer-boundaries
 #+vindex: logos-buffer-read-only
 #+vindex: logos-olivetti
 #+vindex: logos-hide-fringe
@@ -195,7 +195,7 @@ changes out-of-the-box ([[#h:2bb57369-352a-43bf-afe3-0bed2fcc7359][Extra tweaks]
 
 + To have quick access to ~logos-focus-mode~, bind it to a key.  This
   mode checks the variables ~logos-hide-mode-line~, ~logos-scroll-lock~,
-  ~logos-variable-pitch~, ~logos-indicate-buffer-boundaries~,
+  ~logos-variable-pitch~, ~logos-hide-buffer-boundaries~,
   ~logos-buffer-read-only~, ~logos-olivetti~ (requires =olivetti=
   package) and applies their effects if they are non-nil.  Note that
   everything is buffer-local, so it is possible to use file variables as
@@ -217,7 +217,7 @@ changes out-of-the-box ([[#h:2bb57369-352a-43bf-afe3-0bed2fcc7359][Extra tweaks]
 (setq-default logos-hide-mode-line nil
               logos-scroll-lock nil
               logos-variable-pitch nil
-              logos-indicate-buffer-boundaries nil
+              logos-hide-buffer-boundaries nil
               logos-buffer-read-only nil
               logos-olivetti nil
               logos-hide-fringe nil)
