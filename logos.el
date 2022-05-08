@@ -393,6 +393,10 @@ options: `logos-scroll-lock', `logos-variable-pitch',
 ;;
 ;; When using `logos-olivetti' the problem no longer occurs, presumably
 ;; because Olivetti triggers some kind of redraw.  Which one?
+;;
+;; UPDATE 2022-05-08: If I use `redraw-display', the mode line is
+;; restored even without `logos-olivetti'.  This, however, feels like
+;; the wrong thing to do because it affects all visible frames.
 (defun logos--hide-mode-line ()
   "Set `logos-hide-mode-line'."
   (when logos-hide-mode-line
