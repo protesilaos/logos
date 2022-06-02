@@ -227,6 +227,9 @@ changes out-of-the-box ([[#h:2bb57369-352a-43bf-afe3-0bed2fcc7359][Extra tweaks]
               logos-scroll-lock nil
               logos-olivetti nil)
 
+;; Also check this manual for `logos-focus-mode-extra-functions'.  It is
+;; a hook that lets you extend `logos-focus-mode'.
+
 (let ((map global-map))
   (define-key map [remap narrow-to-region] #'logos-narrow-dwim)
   (define-key map [remap forward-page] #'logos-forward-page-dwim)
@@ -418,6 +421,24 @@ result can look like this:
         (org-mode . ,(format "\\(^\\*\\{1,3\\} +\\|^-\\{5\\}$\\|%s\\)" logos--page-delimiter))
         (t . ,(or outline-regexp logos--page-delimiter))))
 #+end_src
+
+** Leverage logos-focus-mode-extra-functions
+:PROPERTIES:
+:CUSTOM_ID: h:a2540f2f-1159-4e5c-a486-e1f2cb63fee8
+:END:
+#+cindex: User-level extensions to logos-focus-mode
+
+#+vindex: logos-focus-mode-extra-functions
+The ~logos-focus-mode-extra-functions~ is a normal hook that runs when
+~logos-focus-mode~ is enabled.  It gives users the power to write their
+own extensions that change how the buffer works when that mode is
+toggled on/off.
+
+The hook is designed to call functions without an argument.  An example
+function that sets a variable is ~logos--buffer-read-only~; one that
+sets a mode is ~logos--scroll-lock~; another that sets the mode of an
+external package is ~logos--olivetti~; while ~logos--hide-fringe~
+provides yet another useful sample.
 
 * Acknowledgements
 :PROPERTIES:
