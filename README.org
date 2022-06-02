@@ -477,7 +477,7 @@ Logos is meant to be a collective effort.  Every bit of help matters.
 + Contributions to code or the manual :: Daniel Mendler, Omar Antolín
   Camarena, Philip Kaludercic, Remco van 't Veer, and user Ypot.
 
-+ Ideas and user feedback :: Daniel Mendler.
++ Ideas and/or user feedback :: Daniel Mendler, Ypot.
 
 * GNU Free Documentation License
 :PROPERTIES:
