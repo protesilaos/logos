@@ -440,6 +440,30 @@ sets a mode is ~logos--scroll-lock~; another that sets the mode of an
 external package is ~logos--olivetti~; while ~logos--hide-fringe~
 provides yet another useful sample.
 
+*** Conditionally toggle org-indent-mode
+:PROPERTIES:
+:CUSTOM_ID: h:ef719925-8d0b-479a-a87e-32b727578bfc
+:END:
+
+Here is a snippet that relies on ~logos-focus-mode-extra-functions~ to
+extend the functionality of ~logos-focus-mode~ at the user level
+([[#h:a2540f2f-1159-4e5c-a486-e1f2cb63fee8][Leverage logos-focus-mode-extra-functions]]).
+
+#+begin_src emacs-lisp
+(defvar my-logos-org-indent nil
+  "When t, disable `org-indent-mode' during `logos-focus-mode'.")
+
+(defun my-logos-org-indent ()
+  "Set `my-logos-org-indent' in `logos-focus-mode'."
+  (when my-logos-org-indent
+    ;; Disable `org-indent-mode' when `logos-focus-mode' is enabled and
+    ;; restore it when `logos-focus-mode' is disabled.  The
+    ;; `logos--mode' function takes care of the technicalities.
+    (logos--mode 'org-indent-mode -1)))
+
+(add-hook 'logos-focus-mode-extra-functions #'my-logos-org-indent)
+#+end_src
+
 * Acknowledgements
 :PROPERTIES:
 :CUSTOM_ID: h:300c12cb-853e-4e06-9627-e1d6fd3a3a38
