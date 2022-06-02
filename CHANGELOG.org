@@ -6,6 +6,48 @@
 The newest release is at the top.  For further details, please consult
 the manual: <https://protesilaos.com/emacs/logos>.
 
+* Version 0.4.0 on 2022-06-02
+:PROPERTIES:
+:CUSTOM_ID: h:f0293274-8cde-4660-ba1a-cffce2910f2f
+:END:
+
++ The Git repo is now hosted on SourceHut.  Mirrors are available on
+  GitHub and GitLab---users can open issues there if they find it
+  difficult to use the official mailing list.  The sources:
+
+  + Official manual: <https://protesilaos.com/emacs/logos>
+  + Change log: <https://protesilaos.com/emacs/logos-changelog>
+  + Git repo on SourceHut: <https://git.sr.ht/~protesilaos/logos>
+    - Mirrors:
+      + GitHub: <https://github.com/protesilaos/logos>
+      + GitLab: <https://gitlab.com/protesilaos/logos>
+  + Mailing list: <https://lists.sr.ht/~protesilaos/logos>
+
++ The new user option ~logos-hide-fringe~ conceals the fringe by
+  applying the same background as the default face.  It does not
+  interfere with ~fringe-mode~, such as by adjusting its size.  This
+  option complements ~logos-olivetti~ and is only relevant if the
+  ~fringe~ face has a distinct background.
+
++ The new ~logos-focus-mode-extra-functions~ is an ordinary hook that
+  unlocks the potential of ~logos-focus-mode~ by allowing the user to
+  trigger any effect when the mode is toggled.  Its doc string
+  references functions from =logos.el= that can be adapted at the user
+  level to pursue varied ends, while the manual furnishes a ready-to-use
+  sample for ~org-indent-mode~.  This feature was inspired by the
+  inquiry of Ypot in issue 1 over at the GitHub mirror:
+  <https://github.com/protesilaos/logos/issues/1>.
+
++ The default value of the user option ~logos-outline-regexp-alist~ now
+  includes an entry for ~markdown-mode~ to determine what constitutes a
+  heading there.  This helps with motions such as
+  ~logos-forward-page-dwim~ while it makes Markdown equally useful for a
+  focused reading or presentation (with ~logos-focus-mode~).
+
++ The manual includes a link to a publication of mine where I explain
+  what the "devel" version of GNU ELPA is and how to make use of it:
+  <https://protesilaos.com/codelog/2022-05-13-emacs-elpa-devel/>.
+
 * Version 0.3.0 on 2022-03-30
 :PROPERTIES:
 :CUSTOM_ID: h:1c2f2cf0-7617-4bb6-9525-eafa1269d06f
