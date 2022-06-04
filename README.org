@@ -462,6 +462,21 @@ extend the functionality of ~logos-focus-mode~ at the user level
 (add-hook 'logos-focus-mode-extra-functions #'my-logos-org-indent)
 #+end_src
 
+The ~my-logos-org-indent~ variable lets the user opt in and out of this
+feature, by setting it to t or nil, respectively.  If such a toggle is
+not needed, the following will suffice:
+
+#+begin_src emacs-lisp
+(defun my-logos-org-indent ()
+  "Set `my-logos-org-indent' in `logos-focus-mode'."
+  ;; Disable `org-indent-mode' when `logos-focus-mode' is enabled and
+  ;; restore it when `logos-focus-mode' is disabled.  The
+  ;; `logos--mode' function takes care of the technicalities.
+  (logos--mode 'org-indent-mode -1))
+
+(add-hook 'logos-focus-mode-extra-functions #'my-logos-org-indent)
+#+end_src
+
 * Acknowledgements
 :PROPERTIES:
 :CUSTOM_ID: h:300c12cb-853e-4e06-9627-e1d6fd3a3a38
