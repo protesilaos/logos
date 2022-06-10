@@ -490,12 +490,12 @@ it remaps its background color to be the same as that of the ~default~
 face.  For example, if the main background is white while the fringe is
 gray, the fringe will become white as well.
 
-#+findex: logos-update-fringe-color-post-theme-load
+#+findex: logos-update-fringe-in-buffers
 The problem with this approach is that the color is not automatically
 updated upon switching to a new theme, such as by toggling between one
 with a light background to another with a dark one.  The solution is to
-assign the ~logos-update-fringe-color-post-theme-load~ function to a
-hook that is triggered by the theme-loading operation.
+assign the ~logos-update-fringe-in-buffers~ function to a hook that is
+triggered by the theme-loading operation.
 
 Some themes provide such a hook.  For example, the =modus-themes=
 package has the ~modus-themes-after-load-theme-hook~ (the themes
@@ -503,8 +503,7 @@ package has the ~modus-themes-after-load-theme-hook~ (the themes
 higher).
 
 #+begin_src emacs-lisp
-(add-hook 'modus-themes-after-load-theme-hook
-          #'logos-update-fringe-color-post-theme-load)
+(add-hook 'modus-themes-after-load-theme-hook #'logos-update-fringe-in-buffers)
 #+end_src
 
 A user-defined, theme-agnostic setup for such a hook can be configured
