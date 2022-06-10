@@ -443,5 +443,17 @@ options: `logos-scroll-lock', `logos-variable-pitch',
   (when logos--fringe-remap-cookie
     (face-remap-remove-relative logos--fringe-remap-cookie)))
 
+(defun logos-update-fringe-color-post-theme-load ()
+  "Recalculate the remapped fringe color.
+This is only relevant if the user option `logos-hide-fringe' is
+non-nil and the `logos-focus-mode' is enabled.
+
+Bind this function to a hook that runs at the post theme load
+phase.  For example: `modus-themes-after-load-theme-hook' from
+the `modus-themes' (`modus-operandi' and `modus-vivendi' themes
+are built into Emacs)."
+  (logos--remove-fringe-remap)
+  (logos--hide-fringe))
+
 (provide 'logos)
 ;;; logos.el ends here

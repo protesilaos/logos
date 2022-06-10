@@ -477,6 +477,56 @@ not needed, the following will suffice:
 (add-hook 'logos-focus-mode-extra-functions #'my-logos-org-indent)
 #+end_src
 
+** Update fringe color on theme switch
+:PROPERTIES:
+:CUSTOM_ID: h:6a254fa0-5706-4032-8a8b-233ffb1f0e6b
+:END:
+
+[ Part of {{{development-version}}} ]
+
+The user option ~logos-hide-fringe~ does not actually remove the fringe,
+as that would change the user's preference for ~fringe-mode~.  Instead,
+it remaps its background color to be the same as that of the ~default~
+face.  For example, if the main background is white while the fringe is
+gray, the fringe will become white as well.
+
+#+findex: logos-update-fringe-color-post-theme-load
+The problem with this approach is that the color is not automatically
+updated upon switching to a new theme, such as by toggling between one
+with a light background to another with a dark one.  The solution is to
+assign the ~logos-update-fringe-color-post-theme-load~ function to a
+hook that is triggered by the theme-loading operation.
+
+Some themes provide such a hook.  For example, the =modus-themes=
+package has the ~modus-themes-after-load-theme-hook~ (the themes
+=modus-operandi= and =modus-vivendi= are built into Emacs version 28 or
+higher).
+
+#+begin_src emacs-lisp
+(add-hook 'modus-themes-after-load-theme-hook
+          #'logos-update-fringe-color-post-theme-load)
+#+end_src
+
+A user-defined, theme-agnostic setup for such a hook can be configured
+thus:
+
+     #+begin_src emacs-lisp
+(defvar after-enable-theme-hook nil
+  "Normal hook run after enabling a theme.")
+
+(defun run-after-enable-theme-hook (&rest _args)
+  "Run `after-enable-theme-hook'."
+  (run-hooks 'after-enable-theme-hook))
+
+(advice-add 'enable-theme :after #'run-after-enable-theme-hook)
+     #+end_src
+
+Then use it like this:
+
+#+begin_src emacs-lisp
+(add-hook 'after-enable-theme-hook #'logos-update-fringe-color-post-theme-load)
+#+end_src
+
 * Acknowledgements
 :PROPERTIES:
 :CUSTOM_ID: h:300c12cb-853e-4e06-9627-e1d6fd3a3a38
