@@ -118,6 +118,12 @@ buffers (~logos-variable-pitch~), make the buffer read-only
 ~fringe~ face (~logos-hide-fringe~).  All these variables are
 buffer-local.
 
+#+vindex: logos-focus-mode-map
+Furthermore, the ~logos-focus-mode~ establishes a bespoke keymap, which
+can be used to, for example, bind the arrow keys to page motions.  The
+keymap is ~logos-focus-mode-map~ and is empty by default (we do not
+define any keys and trust the user to pick their own).
+
 Logos is the familiar word derived from Greek (watch my presentation on
 philosophy about Cosmos, Logos, and the living universe:
 <https://protesilaos.com/books/2022-02-05-cosmos-logos-living-universe/>),
@@ -233,6 +239,9 @@ changes out-of-the-box ([[#h:2bb57369-352a-43bf-afe3-0bed2fcc7359][Extra tweaks]
   (define-key map [remap forward-page] #'logos-forward-page-dwim)
   (define-key map [remap backward-page] #'logos-backward-page-dwim)
   (define-key map (kbd "<f9>") #'logos-focus-mode))
+
+;; Also consider adding keys to `logos-focus-mode-map'.  They will take
+;; effect when `logos-focus-mode' is enabled.
 #+end_src
 
 * Extra tweaks
