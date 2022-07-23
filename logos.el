@@ -360,6 +360,16 @@ alternate, thus toggling MODE."
 (defvar logos-focus-mode-map (make-sparse-keymap)
   "The keymap of `logos-focus-mode'.")
 
+(defvar logos-repeat-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map "]" 'logos-forward-page-dwim)
+    (define-key map "[" 'logos-backward-page-dwim)
+    map)
+  "Keymap to repeat logos key sequences.  Used in `repeat-mode'.")
+
+(put #'logos-forward-page-dwim 'repeat-map 'logos-repeat-map)
+(put #'logos-backward-page-dwim 'repeat-map 'logos-repeat-map)
+
 (define-minor-mode logos-focus-mode
   "Buffer-local mode for focused editing.
 When enabled it sets the buffer-local value of these user
