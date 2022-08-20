@@ -486,6 +486,33 @@ not needed, the following will suffice:
 (add-hook 'logos-focus-mode-extra-functions #'my-logos-org-indent)
 #+end_src
 
+*** Disable menu-bar and tool-bar
+:PROPERTIES:
+:CUSTOM_ID: h:8914f8fc-e6e9-440e-b037-f934e08ee1ae
+:END:
+
+Continuing with the examples in this section of the manual, this is how
+to disable the ~menu-bar-mode~ and ~tool-bar-mode~ when activating the
+~logos-focus-mode~.
+
+#+begin_src emacs-lisp
+;; Assuming the `menu-bar-mode' is enabled by default...
+(defun my-logos-hide-menu-bar ()
+  (logos--mode 'menu-bar-mode -1))
+
+(add-hook 'logos-focus-mode-extra-functions #'my-logos-hide-menu-bar)
+
+;; Assuming the `tool-bar-mode' is enabled by default...
+(defun my-logos-hide-tool-bar ()
+  (logos--mode 'tool-bar-mode -1))
+
+(add-hook 'logos-focus-mode-extra-functions #'my-logos-hide-tool-bar)
+#+end_src
+
+If those modes are already disabled, the following have no effect.
+Otherwise they toggle the bars off while ~logos-focus-mode~ is enabled
+and then restore them back on when ~logos-focus-mode~ is disabled.
+
 ** Update fringe color on theme switch
 :PROPERTIES:
 :CUSTOM_ID: h:6a254fa0-5706-4032-8a8b-233ffb1f0e6b
