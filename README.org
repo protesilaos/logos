@@ -219,7 +219,7 @@ changes out-of-the-box ([[#h:2bb57369-352a-43bf-afe3-0bed2fcc7359][Extra tweaks]
 
 + If you want to nil hide the modeline
   Set in the configuration menu:
-  - Logos Hide Mode Line: on (non-nil)
+  - Logos Hide Mode Line
   
   etc.
         
