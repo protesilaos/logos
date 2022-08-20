@@ -210,14 +210,14 @@ changes out-of-the-box ([[#h:2bb57369-352a-43bf-afe3-0bed2fcc7359][Extra tweaks]
   everything is buffer-local, so it is possible to use file variables as
   described in the Emacs manual.
 
-+ If you want to use outlines instead of page breaks (the ^L)
++ If you want to use outlines instead of page breaks (the ^L).
   Set in the configuration menu:
   - Logos Outlines Are Pages
     (When non-nil, every outline heading is a page delimiter)
   - Logos Outline Regexp Alist
     (Alist of major mode and regular expression of the outline)
 
-+ If you want to nil hide the modeline
++ If you want to hide the modeline.
   Set in the configuration menu:
   - Logos Hide Mode Line
   
