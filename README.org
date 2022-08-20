@@ -210,16 +210,21 @@ changes out-of-the-box ([[#h:2bb57369-352a-43bf-afe3-0bed2fcc7359][Extra tweaks]
   everything is buffer-local, so it is possible to use file variables as
   described in the Emacs manual.
 
++ If you want to use outlines instead of page breaks (the ^L)
+  Set in the configuration menu:
+  - Logos Outlines Are Pages
+    (When non-nil, every outline heading is a page delimiter)
+  - Logos Outline Regexp Alist
+    (Alist of major mode and regular expression of the outline)
+
++ If you want to nil hide the modeline
+  Set in the configuration menu:
+  - Logos Hide Mode Line: on (non-nil)
+  
+  etc.
+        
 #+begin_src emacs-lisp
 (require 'logos)
-
-;; If you want to use outlines instead of page breaks (the ^L)
-(setq logos-outlines-are-pages t)
-(setq logos-outline-regexp-alist
-      `((emacs-lisp-mode . "^;;;+ ")
-        (org-mode . "^\\*+ +")
-        (markdown-mode . "^\\#+ +")
-        (t . ,(or outline-regexp logos--page-delimiter))))
 
 ;; These apply when `logos-focus-mode' is enabled.  Their value is
 ;; buffer-local.
