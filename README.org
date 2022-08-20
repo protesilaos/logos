@@ -228,8 +228,7 @@ changes out-of-the-box ([[#h:2bb57369-352a-43bf-afe3-0bed2fcc7359][Extra tweaks]
 
 ;; These apply when `logos-focus-mode' is enabled.  Their value is
 ;; buffer-local.
-(setq-default logos-hide-mode-line t
-              logos-hide-buffer-boundaries t
+(setq-default logos-hide-buffer-boundaries t
               logos-hide-fringe t
               logos-variable-pitch nil
               logos-buffer-read-only nil
