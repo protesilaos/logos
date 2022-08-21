@@ -114,9 +114,10 @@ This is only relevant when `logos-focus-mode' is enabled."
   :local t)
 
 (defcustom logos-variable-pitch nil
-  "When non-nil, `text-mode' buffers use `variable-pitch-mode'.
+  "When non-nil, use `variable-pitch-mode' where appropriate.
 In programming modes the default font is always used, as that is
-assumed to be a monospaced typeface.
+assumed to be a monospaced typeface, which is appropriate for
+spacing-sensitive text.
 
 This is only relevant when `logos-focus-mode' is enabled."
   :type 'boolean
@@ -402,7 +403,7 @@ options: `logos-scroll-lock', `logos-variable-pitch',
 
 (defun logos--variable-pitch ()
   "Set `logos-variable-pitch'."
-  (when (and logos-variable-pitch (derived-mode-p 'text-mode))
+  (when (and logos-variable-pitch (not (derived-mode-p 'prog-mode)))
     (logos--mode 'variable-pitch-mode 1)))
 
 (defun logos--scroll-lock ()
