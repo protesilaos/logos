@@ -79,6 +79,7 @@ What constitutes an outline is determined by the user option
 When this variable is nil, pages are demarcated by the
 `page-delimiter'."
   :type 'boolean
+  :package-version '(logos . "0.1.0")
   :group 'logos)
 
 (defconst logos--page-delimiter (default-value 'page-delimiter)
@@ -97,6 +98,7 @@ The major mode also targets any of its derivatives.  For example,
 `emacs-lisp-mode' so one only needs to set the outline regexp of
 the latter."
   :type `(alist :key-type symbol :value-type string) ; TODO 2022-03-02: ensure symbol is mode?
+  :package-version '(logos . "0.1.0")
   :group 'logos)
 
 (defcustom logos-hide-mode-line nil
@@ -104,6 +106,7 @@ the latter."
 This is only relevant when `logos-focus-mode' is enabled."
   :type 'boolean
   :group 'logos
+  :package-version '(logos . "0.1.0")
   :local t)
 
 (defcustom logos-scroll-lock nil
@@ -111,6 +114,7 @@ This is only relevant when `logos-focus-mode' is enabled."
 This is only relevant when `logos-focus-mode' is enabled."
   :type 'boolean
   :group 'logos
+  :package-version '(logos . "0.1.0")
   :local t)
 
 (defcustom logos-variable-pitch nil
@@ -122,6 +126,7 @@ spacing-sensitive text.
 This is only relevant when `logos-focus-mode' is enabled."
   :type 'boolean
   :group 'logos
+  :package-version '(logos . "0.5.0")
   :local t)
 
 (define-obsolete-variable-alias
@@ -134,6 +139,7 @@ This is only relevant when `logos-focus-mode' is enabled."
 This is only relevant when `logos-focus-mode' is enabled."
   :type 'boolean
   :group 'logos
+  :package-version '(logos . "0.4.0")
   :local t)
 
 (defcustom logos-buffer-read-only nil
@@ -141,6 +147,7 @@ This is only relevant when `logos-focus-mode' is enabled."
 This applies when `logos-focus-mode' is enabled."
   :type 'boolean
   :group 'logos
+  :package-version '(logos . "0.2.0")
   :local t)
 
 (defcustom logos-olivetti nil
@@ -148,6 +155,7 @@ This applies when `logos-focus-mode' is enabled."
 This is only relevant when `logos-focus-mode' is enabled."
   :type 'boolean
   :group 'logos
+  :package-version '(logos . "0.2.0")
   :local t)
 
 (defcustom logos-hide-fringe nil
@@ -155,6 +163,7 @@ This is only relevant when `logos-focus-mode' is enabled."
 This is only relevant when `logos-focus-mode' is enabled."
   :type 'boolean
   :group 'logos
+  :package-version '(logos . "0.4.0")
   :local t)
 
 (defcustom logos-focus-mode-extra-functions nil
