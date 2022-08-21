@@ -99,6 +99,15 @@ On standard Emacs, those key bindings are: =C-x n n=, =C-x ]=, =C-x [=.
 The ~logos-narrow-dwim~ is not necessary for users who already know how
 to narrow effectively.  Such users may still want to bind it to a key.
 
+#+vindex: logos-repeat-map
+For users running Emacs version 28 or higher, Logos defines the
+~logos-repeat-map~ which is activated when ~repeat-mode~ is enabled.
+This means that page motions, =C-x ]= and =C-x [=, can be repeated by
+following them up with =]= and =[=, respectively.  The repetition stops
+when another command is invoked.
+
+[ The ~logos-repeat-map~ is part of {{{development-version}}} ]
+
 #+findex: logos-focus-mode
 #+vindex: logos-hide-mode-line
 #+vindex: logos-scroll-lock
