@@ -274,6 +274,38 @@ The present author's favourite settings given a ~fill-column~ of =72=:
 Though note that Olivetti works well even without a ~fill-column~ and
 ~auto-fill-mode~ disabled.
 
+** Make EWW look like the rest of Emacs
+:PROPERTIES:
+:CUSTOM_ID: h:2b598775-8a3d-4728-a7ce-edc05d90fdb9
+:END:
+
+By default, all =M-x eww= buffers use the ~shr-max-width~ which is set
+to 120 characters.  This is above the standard value of ~fill-column~
+and thus does not let text flow nicely while using =olivetti= package
+([[#h:8864fb36-53d6-40a2-8e0a-2c609e06d70f][Center the buffer in its window]]).
+
+For a general customization, the user can evaluate this:
+
+#+begin_src emacs-lisp
+(setq shr-max-width fill-column)
+#+end_src
+
+EWW buffers also default to ~variable-pitch~ typography by default (as
+opposed to whatever the font family of the ~default~ face is).  This too
+can be made consistent with the rest of Emacs:
+
+#+begin_src emacs-lisp
+(setq shr-use-fonts nil)
+#+end_src
+
+[ For font-related customizations check the =fontaine= package on GNU
+  ELPA (by Protesilaos). ]
+
+Note that all variables with the =shr-= prefix are about the built-in
+Simple HTML Renderer, so they will affect any other package that relies
+on them beside EWW (in principle, the aforementioned should not pose any
+problem).
+
 ** Automatically reveal Org or Outline subtree
 :PROPERTIES:
 :CUSTOM_ID: h:e18f828f-f9a8-4821-b73b-46793be57abb
