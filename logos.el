@@ -177,6 +177,7 @@ yet another useful sample.
 
 Consult the Logos manual for concrete do-it-yourself examples."
   :type 'hook
+  :package-version '(logos . "0.4.0")
   :group 'logos)
 
 ;;;; General utilities
