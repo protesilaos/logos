@@ -600,7 +600,7 @@ thus:
 Then use it like this:
 
 #+begin_src emacs-lisp
-(add-hook 'after-enable-theme-hook #'logos-update-fringe-color-post-theme-load)
+(add-hook 'after-enable-theme-hook #'logos-update-fringe-in-buffers)
 #+end_src
 
 * Acknowledgements
