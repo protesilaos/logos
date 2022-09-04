@@ -191,7 +191,7 @@ This is only relevant when `logos-focus-mode' is enabled."
   :local t)
 
 (defcustom logos-focus-mode-extra-functions nil
-  "List of functions to execute when `logos-focus-mode' is toggled.
+  "List of functions to execute when `logos-focus-mode' is enabled.
 
 Each function is run without an argument.  An example that sets a
 variable is `logos--buffer-read-only'; one that sets a mode is
@@ -199,7 +199,11 @@ variable is `logos--buffer-read-only'; one that sets a mode is
 package is `logos--olivetti'; while `logos--hide-fringe' provides
 yet another useful sample.
 
-Consult the Logos manual for concrete do-it-yourself examples."
+Consult the Logos manual for concrete do-it-yourself examples.
+
+If a function cannot be like the aforementioned though still
+needs to set its state both when `logos-focus-mode' is enabled
+and disabled, then use the `logos-focus-mode-hook' instead."
   :type 'hook
   :package-version '(logos . "0.4.0")
   :group 'logos)

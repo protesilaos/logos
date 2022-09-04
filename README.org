@@ -476,15 +476,15 @@ result can look like this:
 
 #+vindex: logos-focus-mode-extra-functions
 The ~logos-focus-mode-extra-functions~ is a normal hook that runs when
-~logos-focus-mode~ is enabled.  It gives users the power to write their
-own extensions that change how the buffer works when that mode is
-toggled on/off.
+~logos-focus-mode~ is enabled.  Each function is run without an argument
+and looks like those in =logos.el=.  An example that sets a variable is
+~logos--buffer-read-only~; one that sets a mode is ~logos--scroll-lock~;
+another that sets the mode of an external package is ~logos--olivetti~;
+while ~logos--hide-fringe~ provides yet another useful sample.
 
-The hook is designed to call functions without an argument.  An example
-function that sets a variable is ~logos--buffer-read-only~; one that
-sets a mode is ~logos--scroll-lock~; another that sets the mode of an
-external package is ~logos--olivetti~; while ~logos--hide-fringe~
-provides yet another useful sample.
+If a function cannot be like the aforementioned though still needs to
+set its state both when ~logos-focus-mode~ is enabled and disabled, then
+use the ~logos-focus-mode-hook~ instead.
 
 *** Conditionally toggle org-indent-mode
 :PROPERTIES:
