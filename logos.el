@@ -81,7 +81,7 @@
 ;; backronyms about the mechanics of this package:
 ;;
 ;; 1. `^L' Only Generates Ostensible Slides
-;; 2. Logos Optionally Garners Outline Sections
+;; 2. Logos Optionally Goes through Outline Sections
 ;;
 ;;
 ;; Consult the manual for all sorts of tweaks and extras:
