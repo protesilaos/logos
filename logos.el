@@ -60,8 +60,9 @@
 ;;
 ;; Logos provides some optional aesthetic tweaks which come into effect
 ;; when the buffer-local `logos-focus-mode' is enabled.  These will hide
-;; the mode line (`logos-hide-mode-line'), disable the buffer boundary
-;; indicators (`indicate-buffer-boundaries'), enable `scroll-lock-mode'
+;; the cursor (`logos-hide-cursor'), hide the mode line
+;; (`logos-hide-mode-line'), disable the buffer boundary indicators
+;; (`indicate-buffer-boundaries'), enable `scroll-lock-mode'
 ;; (`logos-scroll-lock'), use `variable-pitch-mode' in non-programming
 ;; buffers (`logos-variable-pitch'), make the buffer read-only
 ;; (`logos-buffer-read-only'), center the buffer in its window if the
@@ -124,6 +125,14 @@ the latter."
   :type `(alist :key-type symbol :value-type string) ; TODO 2022-03-02: ensure symbol is mode?
   :package-version '(logos . "0.1.0")
   :group 'logos)
+
+(defcustom logos-hide-cursor nil
+  "When non-nil hide the cursor.
+This is only relevant when `logos-focus-mode' is enabled."
+  :type 'boolean
+  :group 'logos
+  :package-version '(logos . "1.0.0")
+  :local t)
 
 (defcustom logos-hide-mode-line nil
   "When non-nil hide the modeline.
@@ -413,8 +422,9 @@ alternate, thus toggling MODE."
   "Buffer-local mode for focused editing.
 When enabled it sets the buffer-local value of these user
 options: `logos-scroll-lock', `logos-variable-pitch',
-`logos-hide-mode-line', `logos-hide-buffer-boundaries',
-`logos-buffer-read-only', `logos-olivetti', `logos-hide-fringe'."
+`logos-hide-cursor', `logos-hide-mode-line',
+`logos-hide-buffer-boundaries', `logos-buffer-read-only',
+`logos-olivetti', `logos-hide-fringe'."
   :init-value nil
   :global nil
   :keymap logos-focus-mode-map
@@ -433,6 +443,7 @@ options: `logos-scroll-lock', `logos-variable-pitch',
   (logos--scroll-lock)
   (logos--olivetti)
   ;; variables
+  (logos--hide-cursor)
   (logos--hide-mode-line)
   (logos--indicate-buffer-boundaries)
   (logos--buffer-read-only)
@@ -453,6 +464,11 @@ options: `logos-scroll-lock', `logos-variable-pitch',
   "Set `logos-hide-buffer-boundaries'."
   (when logos-hide-buffer-boundaries
     (logos--set 'indicate-buffer-boundaries nil)))
+
+(defun logos--hide-cursor ()
+  "Set `logos-hide-cursor'."
+  (when logos-hide-cursor
+    (logos--set 'cursor-type nil)))
 
 ;; FIXME 2022-03-13: The mode line is not redrawn properly.  Not even
 ;; with `force-mode-line-update', unless something happens like
