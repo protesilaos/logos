@@ -489,8 +489,8 @@ options: `logos-scroll-lock', `logos-variable-pitch',
 (defun logos--hide-fringe ()
   "Set buffer-local `fringe' to the same background as `default'."
   (when logos-hide-fringe
-      (setq logos--fringe-remap-cookie
-            (face-remap-add-relative 'fringe :background (face-background 'default)))))
+    (setq logos--fringe-remap-cookie
+          (face-remap-add-relative 'fringe :background (face-background 'default)))))
 
 (defun logos--remove-fringe-remap ()
   "Remove effect of `logos--hide-fringe'."
