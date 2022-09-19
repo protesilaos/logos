@@ -418,6 +418,7 @@ alternate, thus toggling MODE."
 (put #'logos-forward-page-dwim 'repeat-map 'logos-repeat-map)
 (put #'logos-backward-page-dwim 'repeat-map 'logos-repeat-map)
 
+;;;###autoload
 (define-minor-mode logos-focus-mode
   "Buffer-local mode for focused editing.
 When enabled it sets the buffer-local value of these user
