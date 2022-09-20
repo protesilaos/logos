@@ -6,7 +6,7 @@
 ;; Maintainer: Logos Development <~protesilaos/logos@lists.sr.ht>
 ;; URL: https://git.sr.ht/~protesilaos/logos
 ;; Mailing-List: https://lists.sr.ht/~protesilaos/logos
-;; Version: 0.5.0
+;; Version: 0.5.1
 ;; Package-Requires: ((emacs "27.1"))
 ;; Keywords: convenience, focus, writing, presentation, narrowing
 
@@ -114,7 +114,7 @@ When this variable is nil, pages are demarcated by the
   `((emacs-lisp-mode . "^;;;+ ")
     (org-mode . "^\\*+ +")
     (markdown-mode . "^\\#+ +")
-    (t . ,(or outline-regexp logos--page-delimiter)))
+    (t . ,(if (boundp 'outline-regexp) outline-regexp logos--page-delimiter)))
   "Alist of major mode and regular expression of the outline.
 Only used when `logos-outlines-are-pages' is non-nil.
 

@@ -226,13 +226,15 @@ changes out-of-the-box ([[#h:2bb57369-352a-43bf-afe3-0bed2fcc7359][Extra tweaks]
 #+begin_src emacs-lisp
 (require 'logos)
 
-;; If you want to use outlines instead of page breaks (the ^L)
+;; If you want to use outlines instead of page breaks (the ^L):
 (setq logos-outlines-are-pages t)
+
+;; This is the default value for the outlines:
 (setq logos-outline-regexp-alist
       `((emacs-lisp-mode . "^;;;+ ")
         (org-mode . "^\\*+ +")
         (markdown-mode . "^\\#+ +")
-        (t . ,(or outline-regexp logos--page-delimiter))))
+        (t . ,(if (boundp 'outline-regexp) outline-regexp logos--page-delimiter))))
 
 ;; These apply when `logos-focus-mode' is enabled.  Their value is
 ;; buffer-local.
@@ -434,7 +436,7 @@ as an outline, else the standard =^L=.
 (setq logos-outline-regexp-alist
       `((emacs-lisp-mode . "^;;;+ ")
         (org-mode . "^\\*+ +")
-        (t . ,(or outline-regexp logos--page-delimiter))))
+        (t . ,(if (boundp 'outline-regexp) outline-regexp logos--page-delimiter))))
 #+end_src
 
 It is possible to tweak those regular expressions to target both the
@@ -444,7 +446,7 @@ outline and the page delimiters:
 (setq logos-outline-regexp-alist
       `((emacs-lisp-mode . ,(format "\\(^;;;+ \\|%s\\)" (default-value 'page-delimiter)))
         (org-mode . ,(format "\\(^\\*+ +\\|%s\\)" (default-value 'page-delimiter)))
-        (t . ,(or outline-regexp logos--page-delimiter))))
+        (t . ,(if (boundp 'outline-regexp) outline-regexp logos--page-delimiter))))
 #+end_src
 
 The form =,(format "\\(^;;;+ \\|%s\\)" logos--page-delimiter)= expands
@@ -458,7 +460,7 @@ pattern).  Putting it all together:
 (setq logos-outline-regexp-alist
       `((emacs-lisp-mode . ,(format "\\(^;;;+ \\|%s\\)" logos--page-delimiter))
         (org-mode . ,(format "\\(^\\*+ +\\|^-\\{5\\}$\\|%s\\)" logos--page-delimiter))
-        (t . ,(or outline-regexp logos--page-delimiter))))
+        (t . ,(if (boundp 'outline-regexp) outline-regexp logos--page-delimiter))))
 #+end_src
 
 Another Org-specific tweak is to use heading levels up to a specific
@@ -472,7 +474,7 @@ end result can look like this:
 (setq logos-outline-regexp-alist
       `((emacs-lisp-mode . ,(format "\\(^;;;+ \\|%s\\)" logos--page-delimiter))
         (org-mode . ,(format "\\(^\\*\\{1,3\\} +\\|^-\\{5\\}$\\|%s\\)" logos--page-delimiter))
-        (t . ,(or outline-regexp logos--page-delimiter))))
+        (t . ,(if (boundp 'outline-regexp) outline-regexp logos--page-delimiter))))
 #+end_src
 
 ** Leverage logos-focus-mode-extra-functions
@@ -620,7 +622,8 @@ Logos is meant to be a collective effort.  Every bit of help matters.
   Omar Antolín Camarena, Philip Kaludercic, Remco van 't Veer, and user
   Ypot.
 
-+ Ideas and/or user feedback :: Daniel Mendler, Marcel Ventosa, Ypot.
++ Ideas and/or user feedback :: Daniel Mendler, Marcel Ventosa,
+  Xiaoduan, Ypot.
 
 * GNU Free Documentation License
 :PROPERTIES:
