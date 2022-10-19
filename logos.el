@@ -107,23 +107,23 @@ When this variable is nil, pages are demarcated by the
   :package-version '(logos . "0.1.0")
   :group 'logos)
 
-(defconst logos--page-delimiter (default-value 'page-delimiter)
-  "The default value of `page-delimiter'.")
-
 (defcustom logos-outline-regexp-alist
   `((emacs-lisp-mode . "^;;;+ ")
     (org-mode . "^\\*+ +")
-    (markdown-mode . "^\\#+ +")
-    (t . ,(if (boundp 'outline-regexp) outline-regexp logos--page-delimiter)))
+    (markdown-mode . "^\\#+ +"))
   "Alist of major mode and regular expression of the outline.
 Only used when `logos-outlines-are-pages' is non-nil.
 
 The major mode also targets any of its derivatives.  For example,
 `lisp-interaction-mode' (the standard scratch buffer) is based on
 `emacs-lisp-mode' so one only needs to set the outline regexp of
-the latter."
+the latter.
+
+If the current buffer's major mode is not specified herein, Logos
+will try to use the `outline-regexp', else fall back to the
+generic `page-delimiter'."
   :type `(alist :key-type symbol :value-type string) ; TODO 2022-03-02: ensure symbol is mode?
-  :package-version '(logos . "0.1.0")
+  :package-version '(logos . "0.6.0")
   :group 'logos)
 
 (defcustom logos-hide-cursor nil
@@ -226,13 +226,22 @@ and disabled, then use the `logos-focus-mode-hook' instead."
 
 ;;;; Page motions
 
+(defconst logos--page-delimiter (default-value 'page-delimiter)
+  "The default value of `page-delimiter'.")
+
+(defun logos--outline-or-delimiter ()
+  "Return the current `outline-regexp' or page delimiter."
+  (if (bound-and-true-p outline-regexp)
+      outline-regexp
+    logos--page-delimiter))
+
 (defun logos--outline-regexp ()
   "Return page delimiter from `logos-outline-regexp-alist'."
   (let ((outline logos-outline-regexp-alist)
         (mode major-mode))
     (or (alist-get mode outline)
         (alist-get (get mode 'derived-mode-parent) outline)
-        (alist-get t outline))))
+        (logos--outline-or-delimiter))))
 
 (defun logos--page-delimiter ()
   "Determine the `page-delimiter'."
