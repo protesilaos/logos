@@ -5,9 +5,9 @@
 #+options: ':t toc:nil author:t email:t num:t
 #+startup: content
 
-#+macro: stable-version 0.5.0
-#+macro: release-date 2022-09-01
-#+macro: development-version 1.0.0-dev
+#+macro: stable-version 1.0.0
+#+macro: release-date 2022-10-19
+#+macro: development-version 1.1.0-dev
 #+macro: file @@texinfo:@file{@@$1@@texinfo:}@@
 #+macro: space @@texinfo:@: @@
 #+macro: kbd @@texinfo:@kbd{@@$1@@texinfo:}@@
@@ -134,8 +134,6 @@ buffers (~logos-variable-pitch~), make the buffer read-only
 ~fringe~ face (~logos-hide-fringe~).  All these variables are
 buffer-local.
 
-[ Note that ~logos-hide-cursor~ is part of {{{development-version}}}. ]
-
 #+vindex: logos-focus-mode-map
 Furthermore, the ~logos-focus-mode~ establishes a bespoke keymap, which
 can be used to, for example, bind the arrow keys to page motions.  The
@@ -227,8 +225,6 @@ changes out-of-the-box ([[#h:2bb57369-352a-43bf-afe3-0bed2fcc7359][Extra tweaks]
   ~logos-olivetti~ (requires =olivetti= package) and applies their
   effects if they are non-nil.  Note that everything is buffer-local, so
   it is possible to use file variables as described in the Emacs manual.
-
-[ Note that ~logos-hide-cursor~ is part of {{{development-version}}}. ]
 
 #+begin_src emacs-lisp
 (require 'logos)

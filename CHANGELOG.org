@@ -6,6 +6,58 @@
 The newest release is at the top.  For further details, please consult
 the manual: <https://protesilaos.com/emacs/logos>.
 
+* Version 0.6.0 on 2022-10-19
+:PROPERTIES:
+:CUSTOM_ID: h:b71866b6-393a-4bff-bb89-e52f5e2fca9d
+:END:
+
++ Revised the fallback condition of the user option
+  ~logos-outline-regexp-alist~ (it comes into effect when the
+  ~logos-outlines-are-pages~ is non-nil).
+    
+  The previous value did not account for the buffer-local values of
+  ~outline-regexp~ or ~page-delimiter~, nor did it adapt to any
+  changes in their respective values.  Instead, it would capture
+  whatever the value was at the time of the symbol's declaration.
+
+  We remove the =t= condition altogether and instead handle the
+  fallback value internally.  Logos will return the current
+  buffer-local value of ~outline-regexp~ or ~page-delimiter~, in this
+  order of priority.
+
+  Put simply, this has the same intent as before, but works properly.
+
++ Introduced a check to guard against a void ~outline-regexp~.  The
+  previous value would cause a problem if the ~outline-regexp~ had not
+  been set yet.  In a typical Emacs session, even on 'emacs -Q', the
+  ~outline-regexp~ is set in the scratch buffer, so we have a valid
+  value at the outset.  However, when the user changes the
+  ~initial-buffer-choice~ or opens Emacs directly for a given file,
+  the ~outline-regexp~ can be void.
+
+  Thanks to Xiaoduan for informing me about this error and for testing
+  my code on how to fix it.  This was done via a private channel and
+  is shared with permission.
+
++ Implemented the user option ~logos-hide-cursor~.  It hides the
+  cursor when ~logos-focus-mode~ is enabled.  Note that this user
+  option is always buffer-local.  Use ~setq-default~ to set its
+  default global value (same as with other user options that apply to
+  ~logos-focus-mode~ (read the manual)).
+    
+  Thanks to Marcel Ventosa for suggesting the idea of hiding the
+  cursor.  This was done via a private channel and is shared with
+  permission.
+
++ Clarified the documentation of ~logos-focus-mode-extra-functions~.
+  It is intended for use by those who are prepared to write custom
+  functions in the spirit of those already used in =logos.el= to
+  affect the buffer when ~logos-focus-mode~ is enabled.
+
++ Added the missing autoload cookie to ~logos-focus-mode~.  This means
+  that it shows up in the completion candidates of =M-x= even if the
+  =logos= library has not been called via =require=.
+
 * Version 0.5.0 on 2022-09-01
 :PROPERTIES:
 :CUSTOM_ID: h:189634ab-187a-4e44-9006-1361459150b8

@@ -6,7 +6,7 @@
 ;; Maintainer: Logos Development <~protesilaos/logos@lists.sr.ht>
 ;; URL: https://git.sr.ht/~protesilaos/logos
 ;; Mailing-List: https://lists.sr.ht/~protesilaos/logos
-;; Version: 0.5.1
+;; Version: 1.0.0
 ;; Package-Requires: ((emacs "27.1"))
 ;; Keywords: convenience, focus, writing, presentation, narrowing
 
@@ -123,7 +123,7 @@ If the current buffer's major mode is not specified herein, Logos
 will try to use the `outline-regexp', else fall back to the
 generic `page-delimiter'."
   :type `(alist :key-type symbol :value-type string) ; TODO 2022-03-02: ensure symbol is mode?
-  :package-version '(logos . "0.6.0")
+  :package-version '(logos . "1.0.0")
   :group 'logos)
 
 (defcustom logos-hide-cursor nil
