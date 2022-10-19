@@ -36,9 +36,16 @@ commit, is explicitly marked as such.
 
 Current development target is {{{development-version}}}.
 
-+ Homepage: https://protesilaos.com/emacs/logos.
-+ Git repository: https://git.sr.ht/~protesilaos/logos.
-+ Mailing list: https://lists.sr.ht/~protesilaos/logos.
++ Package name (GNU ELPA): =logos=
++ Official manual: <https://protesilaos.com/emacs/logos>
++ Change log: <https://protesilaos.com/emacs/logos-changelog>
++ Git repo on SourceHut: <https://git.sr.ht/~protesilaos/logos>
+  - Mirrors:
+    + GitHub: <https://github.com/protesilaos/logos>
+    + GitLab: <https://gitlab.com/protesilaos/logos>
++ Mailing list: <https://lists.sr.ht/~protesilaos/logos>
++ Backronyms: =^L= Only Generates Ostensible Slides; Logos Optionally
+  Goes through Outline Sections
 
 #+toc: headlines 8 insert TOC here, with eight headline levels
 
