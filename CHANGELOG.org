@@ -6,7 +6,7 @@
 The newest release is at the top.  For further details, please consult
 the manual: <https://protesilaos.com/emacs/logos>.
 
-* Version 0.6.0 on 2022-10-19
+* Version 1.0.0 on 2022-10-19
 :PROPERTIES:
 :CUSTOM_ID: h:b71866b6-393a-4bff-bb89-e52f5e2fca9d
 :END:
