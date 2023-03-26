@@ -623,8 +623,8 @@ Logos is meant to be a collective effort.  Every bit of help matters.
   Omar Antolín Camarena, Philip Kaludercic, Remco van 't Veer, and user
   Ypot.
 
-+ Ideas and/or user feedback :: Daniel Mendler, Marcel Ventosa,
-  Xiaoduan, Ypot.
++ Ideas and/or user feedback :: Daniel Mendler, Dave Abrahams, Marcel
+  Ventosa, Xiaoduan, Ypot.
 
 * GNU Free Documentation License
 :PROPERTIES:
