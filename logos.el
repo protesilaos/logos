@@ -231,14 +231,19 @@ and disabled, then use the `logos-focus-mode-hook' instead."
 
 ;;;; Page motions
 
-(defconst logos--page-delimiter (default-value 'page-delimiter)
+(define-obsolete-variable-alias
+  'logos--page-delimiter
+  'logos-page-delimiter
+  "1.1.0")
+
+(defconst logos-page-delimiter (default-value 'page-delimiter)
   "The default value of `page-delimiter'.")
 
 (defun logos--outline-or-delimiter ()
   "Return the current `outline-regexp' or page delimiter."
   (if (bound-and-true-p outline-regexp)
       outline-regexp
-    logos--page-delimiter))
+    logos-page-delimiter))
 
 (defun logos--outline-regexp ()
   "Return page delimiter from `logos-outline-regexp-alist'."
@@ -248,11 +253,16 @@ and disabled, then use the `logos-focus-mode-hook' instead."
         (alist-get (get mode 'derived-mode-parent) outline)
         (logos--outline-or-delimiter))))
 
-(defun logos--page-delimiter ()
+(define-obsolete-function-alias
+  'logos--page-delimiter
+  'logos-page-delimiter
+  "1.1.0")
+
+(defun logos-page-delimiter ()
   "Determine the `page-delimiter'."
   (if logos-outlines-are-pages
       (setq-local page-delimiter (logos--outline-regexp))
-    (setq-local page-delimiter logos--page-delimiter)))
+    (setq-local page-delimiter logos-page-delimiter)))
 
 (defun logos--narrow-to-page (count &optional back)
   "Narrow to COUNTth page with optional BACK motion."
@@ -294,7 +304,7 @@ See `logos-forward-page-dwim' or `logos-backward-page-dwim'.")
 With optional numeric COUNT move by that many pages.  With
 optional BACK perform the motion backwards."
   (let ((cmd (if back #'backward-page #'forward-page)))
-    (logos--page-delimiter)
+    (logos-page-delimiter)
     (if (buffer-narrowed-p)
         (logos--narrow-to-page count back)
       (funcall cmd count)
@@ -349,7 +359,7 @@ page."
   "Return non-nil if there is a `page-delimiter' in the buffer.
 This function does not use `widen': it only checks the accessible
 portion of the buffer."
-  (let ((delimiter (logos--page-delimiter)))
+  (let ((delimiter (logos-page-delimiter)))
     (or (save-excursion (re-search-forward delimiter nil t))
         (save-excursion (re-search-backward delimiter nil t)))))
 
