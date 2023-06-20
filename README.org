@@ -511,8 +511,8 @@ functionality of ~logos-focus-mode~ at the user level ([[#h:a2540f2f-1159-4e5c-a
   (when my-logos-org-indent
     ;; Disable `org-indent-mode' when `logos-focus-mode' is enabled and
     ;; restore it when `logos-focus-mode' is disabled.  The
-    ;; `logos--mode' function takes care of the technicalities.
-    (logos--mode 'org-indent-mode -1)))
+    ;; `logos-set-mode-arg' function takes care of the technicalities.
+    (logos-set-mode-arg 'org-indent-mode -1)))
 
 (add-hook 'logos-focus-mode-hook #'my-logos-org-indent)
 #+end_src
@@ -526,8 +526,8 @@ not needed, the following will suffice:
   "Set `my-logos-org-indent' in `logos-focus-mode'."
   ;; Disable `org-indent-mode' when `logos-focus-mode' is enabled and
   ;; restore it when `logos-focus-mode' is disabled.  The
-  ;; `logos--mode' function takes care of the technicalities.
-  (logos--mode 'org-indent-mode -1))
+  ;; `logos-set-mode-arg' function takes care of the technicalities.
+  (logos-set-mode-arg 'org-indent-mode -1))
 
 (add-hook 'logos-focus-mode-hook #'my-logos-org-indent)
 #+end_src
@@ -544,13 +544,13 @@ to disable the ~menu-bar-mode~ and ~tool-bar-mode~ when activating the
 #+begin_src emacs-lisp
 ;; Assuming the `menu-bar-mode' is enabled by default...
 (defun my-logos-hide-menu-bar ()
-  (logos--mode 'menu-bar-mode -1))
+  (logos-set-mode-arg 'menu-bar-mode -1))
 
 (add-hook 'logos-focus-mode-hook #'my-logos-hide-menu-bar)
 
 ;; Assuming the `tool-bar-mode' is enabled by default...
 (defun my-logos-hide-tool-bar ()
-  (logos--mode 'tool-bar-mode -1))
+  (logos-set-mode-arg 'tool-bar-mode -1))
 
 (add-hook 'logos-focus-mode-hook #'my-logos-hide-tool-bar)
 #+end_src

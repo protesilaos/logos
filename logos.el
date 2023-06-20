@@ -406,11 +406,17 @@ If narrowing is in effect, widen the view."
 
 ;;;; Optional "focus mode" and utilities
 
-;; I learnt about the method of using `logos--mode' and `logos--set'
-;; from Daniel Mendler: <https://github.com/minad>.
+;; I learnt about the method of using `logos-set-mode-arg' and
+;; `logos-set-buffer-local-value' from Daniel Mendler:
+;; <https://github.com/minad>.
 (defvar-local logos--restore nil)
 
-(defun logos--mode (mode arg)
+(define-obsolete-function-alias
+  'logos--mode
+  'logos-set-mode-arg
+  "1.1.0")
+
+(defun logos-set-mode-arg (mode arg)
   "Set MODE to ARG.
 ARG is either 1 or -1.  The current value changes to its
 alternate, thus toggling MODE."
@@ -419,7 +425,12 @@ alternate, thus toggling MODE."
       (push (lambda () (funcall mode old)) logos--restore)
       (funcall mode arg))))
 
-(defun logos--set (var val)
+(define-obsolete-function-alias
+  'logos--set
+  'logos-set-buffer-local-value
+  "1.1.0")
+
+(defun logos-set-buffer-local-value (var val)
   "Set VAR to buffer-local VAL."
   (let ((old (and (boundp var) (symbol-value var))))
     (unless (equal old val)
@@ -478,22 +489,22 @@ options: `logos-scroll-lock', `logos-variable-pitch',
 (defun logos--variable-pitch ()
   "Set `logos-variable-pitch'."
   (when (and logos-variable-pitch (not (derived-mode-p 'prog-mode)))
-    (logos--mode 'variable-pitch-mode 1)))
+    (logos-set-mode-arg 'variable-pitch-mode 1)))
 
 (defun logos--scroll-lock ()
   "Set `logos-scroll-lock'."
   (when logos-scroll-lock
-    (logos--mode 'scroll-lock-mode 1)))
+    (logos-set-mode-arg 'scroll-lock-mode 1)))
 
 (defun logos--indicate-buffer-boundaries ()
   "Set `logos-hide-buffer-boundaries'."
   (when logos-hide-buffer-boundaries
-    (logos--set 'indicate-buffer-boundaries nil)))
+    (logos-set-buffer-local-value 'indicate-buffer-boundaries nil)))
 
 (defun logos--hide-cursor ()
   "Set `logos-hide-cursor'."
   (when logos-hide-cursor
-    (logos--set 'cursor-type nil)))
+    (logos-set-buffer-local-value 'cursor-type nil)))
 
 ;; FIXME 2022-03-13: The mode line is not redrawn properly.  Not even
 ;; with `force-mode-line-update', unless something happens like
@@ -509,17 +520,17 @@ options: `logos-scroll-lock', `logos-variable-pitch',
 (defun logos--hide-mode-line ()
   "Set `logos-hide-mode-line'."
   (when logos-hide-mode-line
-    (logos--set 'mode-line-format nil)))
+    (logos-set-buffer-local-value 'mode-line-format nil)))
 
 (defun logos--buffer-read-only ()
   "Set `logos-buffer-read-only'."
   (when logos-buffer-read-only
-    (logos--set 'buffer-read-only t)))
+    (logos-set-buffer-local-value 'buffer-read-only t)))
 
 (defun logos--olivetti ()
   "Set `logos-olivetti'."
   (when (and logos-olivetti (require 'olivetti nil t))
-    (logos--mode 'olivetti-mode 1)))
+    (logos-set-mode-arg 'olivetti-mode 1)))
 
 (defvar-local logos--fringe-remap-cookie nil
   "Cookie of remapped `fringe' face.")
