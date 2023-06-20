@@ -6,7 +6,7 @@
 ;; Maintainer: Logos Development <~protesilaos/logos@lists.sr.ht>
 ;; URL: https://git.sr.ht/~protesilaos/logos
 ;; Mailing-List: https://lists.sr.ht/~protesilaos/logos
-;; Version: 1.0.1
+;; Version: 1.1.0
 ;; Package-Requires: ((emacs "27.1"))
 ;; Keywords: convenience, focus, writing, presentation, narrowing
 

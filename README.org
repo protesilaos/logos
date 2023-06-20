@@ -4,9 +4,9 @@
 #+language:              en
 #+options:               ':t toc:nil author:t email:t num:t
 #+startup:               content
-#+macro:                 stable-version 1.0.0
-#+macro:                 release-date 2022-10-19
-#+macro:                 development-version 1.1.0-dev
+#+macro:                 stable-version 1.1.0
+#+macro:                 release-date 2023-06-20
+#+macro:                 development-version 1.2.0-dev
 #+export_file_name:      logos.texi
 #+texinfo_filename:      logos.info
 #+texinfo_dir_category:  Emacs misc features
@@ -477,9 +477,6 @@ end result can look like this:
 :CUSTOM_ID: h:a2540f2f-1159-4e5c-a486-e1f2cb63fee8
 :END:
 #+cindex: User-level extensions to logos-focus-mode
-
-[ ~logos-focus-mode-hook~ replaces ~logos-focus-mode-extra-functions~
-  as part of {{{development-version}}}. ]
 
 #+vindex: logos-focus-mode-hook
 The ~logos-focus-mode-hook~ is a normal hook that runs when
