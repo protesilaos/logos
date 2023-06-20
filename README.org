@@ -446,8 +446,8 @@ outline and the page delimiters:
         (org-mode . ,(format "\\(^\\*+ +\\|%s\\)" logos-page-delimiter))))
 #+end_src
 
-to ="\\(^;;;+ \\|^\\)"=.
 The form =,(format "\\(^;;;+ \\|%s\\)" logos-page-delimiter)=
+expands to ="\\(^;;;+ \\|^^L\\)"= where =^L= is the actual control character.
 
 For Org it may be better to either not target the =^L= or to also target
 the horizontal rule (five hyphens on a line, else the =^-\\{5\\}$=
@@ -499,8 +499,8 @@ use the ~logos-focus-mode-hook~ instead.
 :CUSTOM_ID: h:ef719925-8d0b-479a-a87e-32b727578bfc
 :END:
 
-Here is a snippet that relies on ~logos-focus-mode-hook~ to extend the
-functionality of ~logos-focus-mode~ at the user level ([[#h:a2540f2f-1159-4e5c-a486-e1f2cb63fee8][Leverage logos-focus-mode-hook]]).
+Here is a snippet that relies on the ~logos-focus-mode-hook~ to extend
+the functionality of ~logos-focus-mode~ ([[#h:a2540f2f-1159-4e5c-a486-e1f2cb63fee8][Leverage logos-focus-mode-hook]]).
 
 #+begin_src emacs-lisp
 (defvar my-logos-org-indent nil
