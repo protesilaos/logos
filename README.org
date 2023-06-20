@@ -244,8 +244,8 @@ changes out-of-the-box ([[#h:2bb57369-352a-43bf-afe3-0bed2fcc7359][Extra tweaks]
               logos-scroll-lock nil
               logos-olivetti nil)
 
-;; Also check this manual for `logos-focus-mode-extra-functions'.  It is
-;; a hook that lets you extend `logos-focus-mode'.
+;; Also check this manual for `logos-focus-mode-hook'.  It lets you
+;; extend `logos-focus-mode'.
 
 (let ((map global-map))
   (define-key map [remap narrow-to-region] #'logos-narrow-dwim)
@@ -472,19 +472,23 @@ end result can look like this:
         (org-mode . ,(format "\\(^\\*\\{1,3\\} +\\|^-\\{5\\}$\\|%s\\)" logos--page-delimiter))))
 #+end_src
 
-** Leverage logos-focus-mode-extra-functions
+** Leverage logos-focus-mode-hook
 :PROPERTIES:
 :CUSTOM_ID: h:a2540f2f-1159-4e5c-a486-e1f2cb63fee8
 :END:
 #+cindex: User-level extensions to logos-focus-mode
 
-#+vindex: logos-focus-mode-extra-functions
-The ~logos-focus-mode-extra-functions~ is a normal hook that runs when
-~logos-focus-mode~ is enabled.  Each function is run without an argument
-and looks like those in =logos.el=.  An example that sets a variable is
-~logos--buffer-read-only~; one that sets a mode is ~logos--scroll-lock~;
-another that sets the mode of an external package is ~logos--olivetti~;
-while ~logos--hide-fringe~ provides yet another useful sample.
+[ ~logos-focus-mode-hook~ replaces ~logos-focus-mode-extra-functions~
+  as part of {{{development-version}}}. ]
+
+#+vindex: logos-focus-mode-hook
+The ~logos-focus-mode-hook~ is a normal hook that runs when
+~logos-focus-mode~ is enabled.  Each function is called without an
+argument and looks like those in =logos.el=.  An example that sets a
+variable is ~logos--buffer-read-only~; one that sets a mode is
+~logos--scroll-lock~; another that sets the mode of an external
+package is ~logos--olivetti~; while ~logos--hide-fringe~ provides yet
+another useful sample.
 
 If a function cannot be like the aforementioned though still needs to
 set its state both when ~logos-focus-mode~ is enabled and disabled, then
@@ -495,9 +499,8 @@ use the ~logos-focus-mode-hook~ instead.
 :CUSTOM_ID: h:ef719925-8d0b-479a-a87e-32b727578bfc
 :END:
 
-Here is a snippet that relies on ~logos-focus-mode-extra-functions~ to
-extend the functionality of ~logos-focus-mode~ at the user level
-([[#h:a2540f2f-1159-4e5c-a486-e1f2cb63fee8][Leverage logos-focus-mode-extra-functions]]).
+Here is a snippet that relies on ~logos-focus-mode-hook~ to extend the
+functionality of ~logos-focus-mode~ at the user level ([[#h:a2540f2f-1159-4e5c-a486-e1f2cb63fee8][Leverage logos-focus-mode-hook]]).
 
 #+begin_src emacs-lisp
 (defvar my-logos-org-indent nil
@@ -511,7 +514,7 @@ extend the functionality of ~logos-focus-mode~ at the user level
     ;; `logos--mode' function takes care of the technicalities.
     (logos--mode 'org-indent-mode -1)))
 
-(add-hook 'logos-focus-mode-extra-functions #'my-logos-org-indent)
+(add-hook 'logos-focus-mode-hook #'my-logos-org-indent)
 #+end_src
 
 The ~my-logos-org-indent~ variable lets the user opt in and out of this
@@ -526,7 +529,7 @@ not needed, the following will suffice:
   ;; `logos--mode' function takes care of the technicalities.
   (logos--mode 'org-indent-mode -1))
 
-(add-hook 'logos-focus-mode-extra-functions #'my-logos-org-indent)
+(add-hook 'logos-focus-mode-hook #'my-logos-org-indent)
 #+end_src
 
 *** Disable menu-bar and tool-bar
@@ -543,13 +546,13 @@ to disable the ~menu-bar-mode~ and ~tool-bar-mode~ when activating the
 (defun my-logos-hide-menu-bar ()
   (logos--mode 'menu-bar-mode -1))
 
-(add-hook 'logos-focus-mode-extra-functions #'my-logos-hide-menu-bar)
+(add-hook 'logos-focus-mode-hook #'my-logos-hide-menu-bar)
 
 ;; Assuming the `tool-bar-mode' is enabled by default...
 (defun my-logos-hide-tool-bar ()
   (logos--mode 'tool-bar-mode -1))
 
-(add-hook 'logos-focus-mode-extra-functions #'my-logos-hide-tool-bar)
+(add-hook 'logos-focus-mode-hook #'my-logos-hide-tool-bar)
 #+end_src
 
 If those modes are already disabled, the following have no effect.

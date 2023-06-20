@@ -199,14 +199,19 @@ This is only relevant when `logos-focus-mode' is enabled."
   :package-version '(logos . "0.4.0")
   :local t)
 
-(defcustom logos-focus-mode-extra-functions nil
+(define-obsolete-variable-alias
+  'logos-focus-mode-extra-functions
+  'logos-focus-mode-hook
+  "1.1.0")
+
+(defcustom logos-focus-mode-hook nil
   "List of functions to execute when `logos-focus-mode' is enabled.
 
-Each function is run without an argument.  An example that sets a
-variable is `logos--buffer-read-only'; one that sets a mode is
-`logos--scroll-lock'; another that sets the mode of an external
-package is `logos--olivetti'; while `logos--hide-fringe' provides
-yet another useful sample.
+Each function is called without an argument.  An example that
+sets a variable is `logos--buffer-read-only'; one that sets a
+mode is `logos--scroll-lock'; another that sets the mode of an
+external package is `logos--olivetti'; while `logos--hide-fringe'
+provides yet another useful sample.
 
 Consult the Logos manual for concrete do-it-yourself examples.
 
@@ -444,7 +449,7 @@ options: `logos-scroll-lock', `logos-variable-pitch',
   (setq logos--restore nil)
   (when logos-focus-mode
     (logos--setup)
-    (run-hooks 'logos-focus-mode-extra-functions)))
+    (run-hooks 'logos-focus-mode-hook)))
 
 (defun logos--setup ()
   "Set up aesthetics for presentation."
