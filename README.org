@@ -332,7 +332,7 @@ contains subheadings.  The unfolding only applies to the current entry.
 This is the relevant snippet from =logos.el=:
 
 #+begin_src emacs-lisp
-(defun logos--reveal-entry ()
+(defun logos-reveal-entry ()
   "Reveal Org or Outline entry."
   (cond
    ((and (eq major-mode 'org-mode)
@@ -342,16 +342,16 @@ This is the relevant snippet from =logos.el=:
         (bound-and-true-p outline-minor-mode))
     (outline-show-entry))))
 
-(add-hook 'logos-page-motion-hook #'logos--reveal-entry)
+(add-hook 'logos-page-motion-hook #'logos-reveal-entry)
 #+end_src
 
 Users may prefer to reveal the entire subtree instead of the current
 entry: the heading at point and all of its subheadings.  In this case,
-one may override the definition of ~logos--reveal-entry~:
+one may override the definition of ~logos-reveal-entry~:
 
 #+begin_src emacs-lisp
 ;; glue code to expand an Org/Outline heading
-(defun logos--reveal-entry ()
+(defun logos-reveal-entry ()
   "Reveal Org or Outline entry."
   (cond
    ((and (eq major-mode 'org-mode)
@@ -374,11 +374,11 @@ placement invoke the ~recenter~ function with a numeric argument.
 
 #+begin_src emacs-lisp
 ;; place point at the top when changing pages
-(defun my-logos--recenter-top ()
+(defun my-logos-recenter-top ()
   "Use `recenter' to reposition the view at the top."
   (recenter 0))
 
-(add-hook 'logos-page-motion-hook #'my-logos--recenter-top)
+(add-hook 'logos-page-motion-hook #'my-logos-recenter-top)
 #+end_src
 
 The =0= argument refers to the topmost line.  So =1= points to the line
@@ -391,7 +391,7 @@ accordingly:
 (defvar my-logos-no-recenter-top-modes 
   '(emacs-lisp-mode lisp-interaction-mode))
 
-(defun my-logos--recenter-top ()
+(defun my-logos-recenter-top ()
   "Use `recenter' to reposition the view at the top."
   (unless (memq major-mode my-logos-no-recenter-top-modes)
     (recenter 0)))
@@ -400,7 +400,7 @@ accordingly:
 Or simply exclude all programming modes:
 
 #+begin_src emacs-lisp
-(defun my-logos--recenter-top ()
+(defun my-logos-recenter-top ()
   "Use `recenter' to reposition the view at the top."
   (unless (derived-mode-p 'prog-mode)
     (recenter 0)))
