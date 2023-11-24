@@ -142,6 +142,14 @@ This is only relevant when `logos-focus-mode' is enabled."
   :package-version '(logos . "0.1.0")
   :local t)
 
+(defcustom logos-hide-header-line nil
+  "When non-nil hide the header line.
+This is only relevant when `logos-focus-mode' is enabled."
+  :type 'boolean
+  :group 'logos
+  :package-version '(logos . "1.2.0")
+  :local t)
+
 (defcustom logos-scroll-lock nil
   "When non-nil, use `scroll-lock-mode'.
 This is only relevant when `logos-focus-mode' is enabled."
@@ -460,8 +468,8 @@ alternate, thus toggling MODE."
 When enabled it sets the buffer-local value of these user
 options: `logos-scroll-lock', `logos-variable-pitch',
 `logos-hide-cursor', `logos-hide-mode-line',
-`logos-hide-buffer-boundaries', `logos-buffer-read-only',
-`logos-olivetti', `logos-hide-fringe'."
+`logos-hide-header-line', `logos-hide-buffer-boundaries',
+`logos-buffer-read-only', `logos-olivetti', `logos-hide-fringe'."
   :init-value nil
   :global nil
   :keymap logos-focus-mode-map
@@ -482,6 +490,7 @@ options: `logos-scroll-lock', `logos-variable-pitch',
   ;; variables
   (logos--hide-cursor)
   (logos--hide-mode-line)
+  (logos--hide-header-line)
   (logos--indicate-buffer-boundaries)
   (logos--buffer-read-only)
   ;; faces
@@ -522,6 +531,11 @@ options: `logos-scroll-lock', `logos-variable-pitch',
   "Set `logos-hide-mode-line'."
   (when logos-hide-mode-line
     (logos-set-buffer-local-value 'mode-line-format nil)))
+
+(defun logos--hide-header-line ()
+  "Set `logos-hide-header-line'."
+  (when logos-hide-header-line
+    (logos-set-buffer-local-value 'header-line-format nil)))
 
 (defun logos--buffer-read-only ()
   "Set `logos-buffer-read-only'."

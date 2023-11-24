@@ -111,6 +111,7 @@ another command is invoked.
 #+findex: logos-focus-mode
 #+vindex: logos-hide-cursor
 #+vindex: logos-hide-mode-line
+#+vindex: logos-hide-header-line
 #+vindex: logos-scroll-lock
 #+vindex: logos-variable-pitch
 #+vindex: logos-hide-buffer-boundaries
@@ -118,15 +119,16 @@ another command is invoked.
 #+vindex: logos-olivetti
 #+vindex: logos-hide-fringe
 Logos provides some optional aesthetic tweaks which come into effect
-when the buffer-local ~logos-focus-mode~ is enabled.  These will hide
+when the buffer-local ~logos-focus-mode~ is enabled. These will hide
 the cursor (~logos-hide-cursor~), hide the mode line
-(~logos-hide-mode-line~), disable the buffer boundary indicators
+(~logos-hide-mode-line~), hide the header line
+(~logos-hide-header-line~), disable the buffer boundary indicators
 (~indicate-buffer-boundaries~), enable ~scroll-lock-mode~
 (~logos-scroll-lock~), use ~variable-pitch-mode~ in non-programming
 buffers (~logos-variable-pitch~), make the buffer read-only
 (~logos-buffer-read-only~), center the buffer in its window if the
 =olivetti= package is installed (~logos-olivetti~), and hide the
-~fringe~ face (~logos-hide-fringe~).  All these variables are
+~fringe~ face (~logos-hide-fringe~). All these variables are
 buffer-local.
 
 #+vindex: logos-focus-mode-map
@@ -213,13 +215,15 @@ changes out-of-the-box ([[#h:2bb57369-352a-43bf-afe3-0bed2fcc7359][Extra tweaks]
   narrowing commands (otherwise it maps to =C-x n n= in this example,
   assuming the default keys).
 
-+ To have quick access to ~logos-focus-mode~, bind it to a key.  This
-  mode checks the variables ~logos-hide-cursor~, ~logos-hide-mode-line~,
++ To have quick access to ~logos-focus-mode~, bind it to a key. This
+  mode checks the variables ~logos-hide-cursor~,
+  ~logos-hide-mode-line~, ~logos-hide-header-line~,
   ~logos-scroll-lock~, ~logos-variable-pitch~,
   ~logos-hide-buffer-boundaries~, ~logos-buffer-read-only~,
   ~logos-olivetti~ (requires =olivetti= package) and applies their
-  effects if they are non-nil.  Note that everything is buffer-local, so
-  it is possible to use file variables as described in the Emacs manual.
+  effects if they are non-nil. Note that everything is buffer-local,
+  so it is possible to use file variables as described in the Emacs
+  manual.
 
 #+begin_src emacs-lisp
 (require 'logos)
@@ -237,6 +241,7 @@ changes out-of-the-box ([[#h:2bb57369-352a-43bf-afe3-0bed2fcc7359][Extra tweaks]
 ;; buffer-local.
 (setq-default logos-hide-cursor nil
               logos-hide-mode-line t
+              logos-hide-header-line t
               logos-hide-buffer-boundaries t
               logos-hide-fringe t
               logos-variable-pitch nil
