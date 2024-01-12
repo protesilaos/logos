@@ -1,6 +1,6 @@
 ;;; logos.el --- Simple focus mode and extras -*- lexical-binding: t -*-
 
-;; Copyright (C) 2022-2023  Free Software Foundation, Inc.
+;; Copyright (C) 2022-2024  Free Software Foundation, Inc.
 
 ;; Author: Protesilaos Stavrou <info@protesilaos.com>
 ;; Maintainer: Logos Development <~protesilaos/logos@lists.sr.ht>
