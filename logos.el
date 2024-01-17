@@ -3,9 +3,8 @@
 ;; Copyright (C) 2022-2024  Free Software Foundation, Inc.
 
 ;; Author: Protesilaos Stavrou <info@protesilaos.com>
-;; Maintainer: Logos Development <~protesilaos/logos@lists.sr.ht>
-;; URL: https://git.sr.ht/~protesilaos/logos
-;; Mailing-List: https://lists.sr.ht/~protesilaos/logos
+;; Maintainer: Protesilaos Stavrou <info@protesilaos.com>
+;; URL: https://github.com/protesilaos/logos
 ;; Version: 1.1.1
 ;; Package-Requires: ((emacs "27.1"))
 ;; Keywords: convenience, focus, writing, presentation, narrowing
