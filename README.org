@@ -582,8 +582,16 @@ higher).
 (add-hook 'modus-themes-after-load-theme-hook #'logos-update-fringe-in-buffers)
 #+end_src
 
-A user-defined, theme-agnostic setup for such a hook can be configured
-thus:
+Or use the special hook ~enable-theme-functions~ that is part of
+Emacs 29. [ The support of ~logos-update-fringe-in-buffers~ for
+~enable-theme-functions~ is part of {{{development-version}}}. ]
+
+#+begin_src emacs-lisp
+(add-hook 'enable-theme-functions #'logos-update-fringe-in-buffers)
+#+end_src
+
+For older versions of Emacs before 29, a user-defined, theme-agnostic
+setup for such a hook can be configured thus:
 
      #+begin_src emacs-lisp
 (defvar after-enable-theme-hook nil
