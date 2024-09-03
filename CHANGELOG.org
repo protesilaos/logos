@@ -9,6 +9,116 @@ the manual: <https://protesilaos.com/emacs/logos>.
 
 #+toc: headlines 1 insert TOC here, with one headline level
 
+* Version 1.2.0 on 2024-09-03
+:PROPERTIES:
+:CUSTOM_ID: h:c1cd618c-0de7-4a13-9df7-ef28b99e3857
+:END:
+
+This version introduces minor refinements to an already stable
+package.
+
+** The ~logos-update-fringe-in-buffers~ works with ~enable-theme-functions~
+:PROPERTIES:
+:CUSTOM_ID: h:d3e52d5c-0765-4780-a47f-145f8af30a4b
+:END:
+
+It is possible to hide the fringes when ~logos-focus-mode~ is enabled
+by setting the user option ~logos-hide-fringe~ to a non-nil value. To
+make sure that the proper colours are applied when the theme changes,
+users must also set up the ~logos-update-fringe-in-buffers~ to run
+after the theme is loaded.
+
+In versions of Emacs before 29 there was no standard way to do this
+(my themes (Modus, Ef, Standard) have always had the relevant "post
+load" hook). With Emacs 29, users can now use the ~enable-theme-functions~
+to make this work with all themes:
+
+#+begin_src emacs-lisp
+(add-hook 'enable-theme-functions #'logos-update-fringe-in-buffers)
+#+end_src
+
+** New ~logos-hide-header-line~ user option for ~logos-focus-mode~
+:PROPERTIES:
+:CUSTOM_ID: h:a1c473e9-c3ad-40f7-951f-5ddc7467cf14
+:END:
+
+Users can now optionally hide the header-line when ~logos-focus-mode~
+is enabled in the current buffer. This is done by setting ~logos-hide-header-line~
+to a non-nil value and then enabling the mode.
+
+[ Remember to read the manual for all such options. ]
+
+** Documented how to conditionally toggle ~org-indent-mode~
+:PROPERTIES:
+:CUSTOM_ID: h:9e0b4855-a634-44cc-af45-99a7893ae693
+:END:
+
+The ~logos-focus-mode~ operates in the current buffer to make the
+changes that are needed for a more "focused" editing experience. Here
+we extend it to work with Org's virtual indentation.
+
+It disables ~org-indent-mode~ when ~logos-focus-mode~ is enabled and
+restores it when ~logos-focus-mode~ is disabled.  The
+~logos-set-mode-arg~ function takes care of the technicalities.
+
+#+begin_src emacs-lisp
+(defun my-logos-org-indent ()
+  (when logos-focus-mode
+    (logos-set-mode-arg 'org-indent-mode -1)))
+
+(add-hook 'logos-focus-mode-hook #'my-logos-org-indent)
+#+end_src
+
+** Documented how to toggle the menu-bar, tool-bar, tab-bar, and tab-line
+:PROPERTIES:
+:CUSTOM_ID: h:72b44395-5647-4d2a-92a7-07598c30df37
+:END:
+
+Continuing from above, the following code block below shows how to
+disable the ~menu-bar-mode~, ~tool-bar-mode~, ~tab-bar-mode~, and
+~tab-line-mode~ when ~logos-focus-mode~ is enabled. If the given mode
+is already disabled, the corresponding function does nothing.
+Otherwise, it toggles the mode off/on when ~logos-focus-mode~ is
+enabled/disabled.
+
+#+begin_src emacs-lisp
+(defun my-logos-hide-menu-bar ()
+  (when logos-focus-mode
+    (logos-set-mode-arg 'menu-bar-mode -1)))
+
+(add-hook 'logos-focus-mode-hook #'my-logos-hide-menu-bar)
+
+;; Assuming the `tool-bar-mode' is enabled by default...
+(defun my-logos-hide-tool-bar ()
+  (when logos-focus-mode
+    (logos-set-mode-arg 'tool-bar-mode -1)))
+
+(add-hook 'logos-focus-mode-hook #'my-logos-hide-tool-bar)
+
+;; Assuming the `tab-bar-mode' is enabled by default...
+(defun my-logos-hide-tab-bar ()
+  (when logos-focus-mode
+    (logos-set-mode-arg 'tab-bar-mode -1)))
+
+(add-hook 'logos-focus-mode-hook #'my-logos-hide-tab-bar)
+
+;; Assuming the `tab-line-mode' is enabled by default...
+(defun my-logos-hide-tab-line ()
+  (when logos-focus-mode
+    (logos-set-mode-arg 'tab-line-mode -1)))
+
+(add-hook 'logos-focus-mode-hook #'my-logos-hide-tab-line)
+#+end_src
+
+** Fixed a malformed ~cond~
+:PROPERTIES:
+:CUSTOM_ID: h:d420dabe-0d37-4ad0-a911-47a37dbaa3a4
+:END:
+
+This was affecting the ~logos-narrow-dwim~ function in some cases.
+Thanks to Edgar Vincent for the contribution, which happened in the
+now-defunct mailing list.
+
 * Version 1.1.0 on 2023-06-20
 :PROPERTIES:
 :CUSTOM_ID: h:cf39d0d8-9299-4d1a-a625-c918429f9989
@@ -97,7 +207,7 @@ the GitHub mirror: <https://github.com/protesilaos/logos/issues/12>.
 + Revised the fallback condition of the user option
   ~logos-outline-regexp-alist~ (it comes into effect when the
   ~logos-outlines-are-pages~ is non-nil).
-    
+
   The previous value did not account for the buffer-local values of
   ~outline-regexp~ or ~page-delimiter~, nor did it adapt to any
   changes in their respective values.  Instead, it would capture
@@ -127,7 +237,7 @@ the GitHub mirror: <https://github.com/protesilaos/logos/issues/12>.
   option is always buffer-local.  Use ~setq-default~ to set its
   default global value (same as with other user options that apply to
   ~logos-focus-mode~ (read the manual)).
-    
+
   Thanks to Marcel Ventosa for suggesting the idea of hiding the
   cursor.  This was done via a private channel and is shared with
   permission.
