@@ -390,7 +390,7 @@ If the recentering should not affect specific modes, tweak the function
 accordingly:
 
 #+begin_src emacs-lisp
-(defvar my-logos-no-recenter-top-modes 
+(defvar my-logos-no-recenter-top-modes
   '(emacs-lisp-mode lisp-interaction-mode))
 
 (defun my-logos-recenter-top ()
@@ -521,12 +521,11 @@ restores it when ~logos-focus-mode~ is disabled.  The
 Continuing with the examples in this section of the manual, the code
 block below shows how to disable the ~menu-bar-mode~, ~tool-bar-mode~,
 ~tab-bar-mode~, and ~tab-line-mode~ when ~logos-focus-mode~ is
-enabled.  If the modes are already disabled, the corresponding
-function does nothing.  Otherwise it toggles the mode off/on when
+enabled. If the given mode is already disabled, the corresponding
+function does nothing. Otherwise it toggles the mode off/on when
 ~logos-focus-mode~ is enabled/disabled.
 
 #+begin_src emacs-lisp
-;; Assuming the `menu-bar-mode' is enabled by default...
 (defun my-logos-hide-menu-bar ()
   (when logos-focus-mode
     (logos-set-mode-arg 'menu-bar-mode -1)))
