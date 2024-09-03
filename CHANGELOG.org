@@ -2,9 +2,12 @@
 #+AUTHOR: Protesilaos Stavrou
 #+EMAIL: info@protesilaos.com
 #+OPTIONS: ':nil toc:nil num:nil author:nil email:nil
+#+STARTUP: content
 
 The newest release is at the top.  For further details, please consult
 the manual: <https://protesilaos.com/emacs/logos>.
+
+#+toc: headlines 1 insert TOC here, with one headline level
 
 * Version 1.1.0 on 2023-06-20
 :PROPERTIES:
