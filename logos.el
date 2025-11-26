@@ -261,6 +261,8 @@ and disabled, then use the `logos-focus-mode-hook' instead."
 Return `page-delimiter'."
   (setq-local page-delimiter (if logos-outlines-are-pages (logos--outline-regexp) logos-page-delimiter)))
 
+;; TODO 2025-11-26: I do not like this and wish to rewrite it.  Though
+;; it technically works...
 (defun logos--narrow-to-page (count &optional back)
   "Narrow to COUNTth page with optional BACK motion."
   ;; Position point to avoid skipping pages.
@@ -296,12 +298,17 @@ Return `page-delimiter'."
   "Hook that runs after a page motion.
 See `logos-forward-page-dwim' or `logos-backward-page-dwim'.")
 
+;; TODO 2025-11-26: Refactor this to only accept a COUNT.  We can
+;; infer BACK if COUNT is `minusp'.
 (defun logos--page-motion (&optional count back)
   "Routine for page motions.
 With optional numeric COUNT move by that many pages.  With
 optional BACK perform the motion backwards."
   (let ((cmd (if back #'backward-page #'forward-page)))
     (logos-set-page-delimiter)
+    ;; TODO 2025-11-26: We would be skipping the current page
+    ;; delimiter if we are on its line.  But check if this is releavnt
+    ;; when the buffer is narrowed.
     (if (buffer-narrowed-p)
         (logos--narrow-to-page count back)
       (funcall cmd count)
