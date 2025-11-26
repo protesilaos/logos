@@ -89,8 +89,6 @@
 
 ;;; Code:
 
-;;;; General utilities
-
 (defgroup logos ()
   "Simple focus mode and extras."
   :group 'editing)
@@ -228,13 +226,6 @@ and disabled, then use the `logos-focus-mode-hook' instead."
   :type 'hook
   :package-version '(logos . "0.4.0")
   :group 'logos)
-
-;;;; General utilities
-
-(defun logos--focus-p ()
-  "Return non-nil if `logos-focus-mode' is bound locally."
-  (when (bound-and-true-p logos-focus-mode)
-    (buffer-local-value 'logos-focus-mode (current-buffer))))
 
 ;;;; Page motions
 
